@@ -56,6 +56,7 @@ const LoginScreens = () => {
           style={{fontSize: 18, flex: 1}}
           onChangeText={setEmail}
           value={email}
+          placeholder="Username"
         />
       </View>
       <View
@@ -74,6 +75,7 @@ const LoginScreens = () => {
           style={{fontSize: 18, flex: 1}}
           onChangeText={setPassword}
           value={password}
+          placeholder="Password"
         />
       </View>
 

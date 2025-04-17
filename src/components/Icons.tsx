@@ -8,6 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 interface Props {
   name: String;
@@ -23,6 +24,8 @@ const Icons: React.FC<Props> = props => {
   switch (props.type) {
     case 'FontAwesome5':
       return <FontAwesome5 {...props} size={props.size} />;
+    case 'FontAwesome6':
+      return <FontAwesome6 {...props} size={props.size} />;
     case 'AntDesign':
       return <AntDesign {...props} size={props.size} />;
     case 'Ionicons':

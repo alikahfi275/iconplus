@@ -130,6 +130,7 @@ project.ext.vectoricons = [
         'Feather.ttf',
         'FontAwesome.ttf',
         'FontAwesome5.ttf',    
+        'FontAwesome6.ttf',    
         'Fontisto.ttf',
         'Ionicons.ttf',
         'MaterialIcons.ttf',
