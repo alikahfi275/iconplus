@@ -76,6 +76,7 @@ const LoginScreens = () => {
           onChangeText={setPassword}
           value={password}
           placeholder="Password"
+          secureTextEntry={true}
         />
       </View>
 

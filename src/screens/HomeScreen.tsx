@@ -78,7 +78,7 @@ const HomeScreen = () => {
             marginTop: 5,
             textAlign: 'center',
           }}>
-          Stok Barang Service
+          History
         </Text>
       </TouchableOpacity>
     </View>
