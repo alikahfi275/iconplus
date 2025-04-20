@@ -3,8 +3,10 @@ import React from 'react';
 import {BannerImage} from '../utils/image';
 import Icons from '../components/Icons';
 import Card from '../components/Card';
+import {useNavigation} from '@react-navigation/native';
 
 const HomeScreen = () => {
+  const navigation: any = useNavigation();
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar
@@ -33,8 +35,18 @@ const HomeScreen = () => {
           marginHorizontal: 25,
           marginTop: 30,
         }}>
-        <Card type="MaterialIcons" icon="move-to-inbox" title="Barang Masuk" />
-        <Card type="MaterialIcons" icon="outbox" title="Barang Keluar" />
+        <Card
+          type="MaterialIcons"
+          icon="move-to-inbox"
+          title="Barang Masuk"
+          onPress={() => navigation.navigate('BarangMasuk')}
+        />
+        <Card
+          type="MaterialIcons"
+          icon="outbox"
+          title="Barang Keluar"
+          onPress={() => navigation.navigate('BarangKeluar')}
+        />
       </View>
       <View
         style={{
@@ -47,11 +59,17 @@ const HomeScreen = () => {
           type="MaterialIcons"
           icon="markunread-mailbox"
           title="Barang Return"
+          onPress={() => navigation.navigate('BarangReturn')}
         />
-        <Card type="MaterialIcons" icon="all-inbox" title="Stok Barang" />
+        <Card
+          type="MaterialIcons"
+          icon="all-inbox"
+          title="Stok Barang"
+          onPress={() => navigation.navigate('StokBarang')}
+        />
       </View>
       <TouchableOpacity
-        onPress={() => {}}
+        onPress={() => navigation.navigate('History')}
         style={{
           padding: 20,
           borderRadius: 15,
