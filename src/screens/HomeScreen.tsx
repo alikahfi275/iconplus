@@ -49,10 +49,7 @@ const HomeScreen = () => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar
-        backgroundColor="rgba(159, 229, 255, 0.23)"
-        barStyle="dark-content"
-      />
+      <StatusBar backgroundColor="#f0f7fa" barStyle="dark-content" />
       <Image
         source={BannerImage}
         style={{width: '100%', height: 250}}
