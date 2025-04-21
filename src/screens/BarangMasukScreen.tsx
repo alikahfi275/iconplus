@@ -9,24 +9,41 @@ import {
 import React, {useState} from 'react';
 import {NoImage} from '../utils/image';
 import CustomTextInput from '../components/CustomTextInput';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 const BarangMasukScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [namaBarang, setNamaBarang] = useState('');
   const [jumlahBarang, setJumlahBarang] = useState('');
   const [kategori, setKategori] = useState('');
+  const [gambarBarang, setGambarBarang] = useState('');
+
+  const openPictures = () => {
+    ImageCropPicker.openPicker({
+      cropping: true,
+      width: 500,
+      height: 500,
+      cropperCircleOverlay: false,
+      includeBase64: true,
+    })
+      .then((imageResult: any) => {
+        const imageUri = `data:${imageResult.mime};base64,${imageResult.data}`;
+        setGambarBarang(imageUri);
+      })
+      .catch(error => {});
+  };
 
   return (
     <ScrollView style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="white" barStyle="dark-content" />
       <View style={{alignItems: 'center', marginTop: 20}}>
         <Image
-          source={NoImage}
-          style={{width: 200, height: 200}}
+          source={gambarBarang ? {uri: gambarBarang} : NoImage}
+          style={{width: 200, height: 200, marginBottom: 5, borderRadius: 10}}
           resizeMode="stretch"
         />
       </View>
-      <TouchableOpacity onPress={() => {}}>
+      <TouchableOpacity onPress={() => openPictures()}>
         <Text
           style={{
             fontWeight: '700',

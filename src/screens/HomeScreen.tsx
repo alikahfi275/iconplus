@@ -1,12 +1,52 @@
-import {View, Text, StatusBar, Image, TouchableOpacity} from 'react-native';
-import React from 'react';
+import {
+  View,
+  Text,
+  StatusBar,
+  Image,
+  TouchableOpacity,
+  Platform,
+} from 'react-native';
+import React, {useEffect} from 'react';
 import {BannerImage} from '../utils/image';
 import Icons from '../components/Icons';
 import Card from '../components/Card';
 import {useNavigation} from '@react-navigation/native';
+import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
 const HomeScreen = () => {
   const navigation: any = useNavigation();
+
+  const requestPermissions = async () => {
+    if (Platform.OS === 'android') {
+      try {
+        const permissions = [
+          PERMISSIONS.ANDROID.ACCESS_FINE_LOCATION,
+          PERMISSIONS.ANDROID.ACCESS_COARSE_LOCATION,
+          PERMISSIONS.ANDROID.BLUETOOTH_SCAN,
+          PERMISSIONS.ANDROID.BLUETOOTH_CONNECT,
+          PERMISSIONS.ANDROID.READ_EXTERNAL_STORAGE,
+          PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+          PERMISSIONS.ANDROID.ACCESS_MEDIA_LOCATION,
+          PERMISSIONS.ANDROID.READ_MEDIA_IMAGES,
+          PERMISSIONS.ANDROID.READ_MEDIA_VIDEO,
+        ];
+
+        for (const permission of permissions) {
+          const result = await check(permission);
+          if (result !== RESULTS.GRANTED) {
+            await request(permission);
+          }
+        }
+      } catch (err) {
+        console.warn(err);
+      }
+    }
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      requestPermissions();
+    }, 1000);
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar
