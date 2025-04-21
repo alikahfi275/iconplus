@@ -31,6 +31,7 @@ const Card = (props: any) => {
           fontWeight: '500',
           marginTop: 5,
           textAlign: 'center',
+          color: '#4c4c4c',
         }}>
         {title}
       </Text>

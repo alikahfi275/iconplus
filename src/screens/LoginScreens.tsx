@@ -53,10 +53,11 @@ const LoginScreens = () => {
           style={{marginRight: 5}}
         />
         <TextInput
-          style={{fontSize: 18, flex: 1}}
+          style={{fontSize: 18, flex: 1, color: '#4c4c4c'}}
           onChangeText={setEmail}
           value={email}
           placeholder="Username"
+          placeholderTextColor={'#b2b2b2'}
         />
       </View>
       <View
@@ -72,11 +73,12 @@ const LoginScreens = () => {
         }}>
         <Icons name="key" color="#72B4D3" size={25} style={{marginRight: 5}} />
         <TextInput
-          style={{fontSize: 18, flex: 1}}
+          style={{fontSize: 18, flex: 1, color: '#4c4c4c'}}
           onChangeText={setPassword}
           value={password}
           placeholder="Password"
           secureTextEntry={true}
+          placeholderTextColor={'#b2b2b2'}
         />
       </View>
 
