@@ -92,7 +92,7 @@ const LoginScreens = () => {
         }}
         onPress={() => navigation.navigate('Home')}>
         <Text style={{textAlign: 'center', color: 'white', fontSize: 20}}>
-          Login
+          Sedang Tahap Pengembangan
         </Text>
       </TouchableOpacity>
     </View>
