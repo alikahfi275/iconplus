@@ -42,6 +42,7 @@ const HomeScreen = () => {
       }
     }
   };
+
   useEffect(() => {
     setTimeout(() => {
       requestPermissions();

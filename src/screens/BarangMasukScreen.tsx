@@ -10,6 +10,8 @@ import React, {useState} from 'react';
 import {NoImage} from '../utils/image';
 import CustomTextInput from '../components/CustomTextInput';
 import ImageCropPicker from 'react-native-image-crop-picker';
+import {LocalStorage} from '../utils/database/storage';
+import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
 const BarangMasukScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
@@ -17,6 +19,8 @@ const BarangMasukScreen = () => {
   const [jumlahBarang, setJumlahBarang] = useState('');
   const [kategori, setKategori] = useState('');
   const [gambarBarang, setGambarBarang] = useState('');
+
+  const isValid = kodeBarang && namaBarang && jumlahBarang && kategori;
 
   const openPictures = () => {
     ImageCropPicker.openPicker({
@@ -31,6 +35,43 @@ const BarangMasukScreen = () => {
         setGambarBarang(imageUri);
       })
       .catch(error => {});
+  };
+
+  const saveIncomingItems = () => {
+    try {
+      const rawData = LocalStorage.getItem('incomingItems');
+      const existingData = Array.isArray(rawData) ? rawData : [];
+
+      const newData = {
+        id: Date.now(),
+        kode: kodeBarang,
+        nama: namaBarang,
+        jumlah: jumlahBarang,
+        kategori: kategori,
+        gambar: gambarBarang,
+      };
+
+      const updatedData = [...existingData, newData];
+      LocalStorage.setItem('incomingItems', updatedData);
+
+      Toast.show({
+        type: ALERT_TYPE.SUCCESS,
+        title: 'SUKSES',
+        textBody: 'Data Anda Berhasil Disimpan ',
+      });
+
+      setKodeBarang('');
+      setNamaBarang('');
+      setJumlahBarang('');
+      setKategori('');
+      setGambarBarang('');
+    } catch (error) {
+      Toast.show({
+        type: ALERT_TYPE.DANGER,
+        title: 'GAGAL',
+        textBody: 'Data Anda Tidak Berhasil Disimpan ',
+      });
+    }
   };
 
   return (
@@ -83,13 +124,15 @@ const BarangMasukScreen = () => {
       </View>
       <TouchableOpacity
         style={{
-          backgroundColor: '#72B4D3',
+          backgroundColor: isValid ? '#72B4D3' : '#b2b2b2',
           padding: 10,
           marginHorizontal: 20,
           borderRadius: 15,
           marginTop: 50,
           marginBottom: 20,
-        }}>
+        }}
+        onPress={saveIncomingItems}
+        disabled={!isValid}>
         <Text
           style={{
             textAlign: 'center',
