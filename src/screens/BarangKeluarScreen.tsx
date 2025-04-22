@@ -20,6 +20,11 @@ const BarangKeluarScreen = () => {
   const rawData = LocalStorage.getItem('incomingItems');
   const allData = Array.isArray(rawData) ? rawData : [];
 
+  const rawDataHistory = LocalStorage.getItem('historyItems');
+  const existingDataHistory = Array.isArray(rawDataHistory)
+    ? rawDataHistory
+    : [];
+
   const handleCekBarang = () => {
     const found = allData.find(
       item => item.kode.toLowerCase() === kodeBarang.toLowerCase(),
@@ -47,6 +52,20 @@ const BarangKeluarScreen = () => {
       setMessage('Jumlah melebihi stok');
       return;
     }
+
+    const newDataHistory = {
+      id: Date.now(),
+      kode: kodeBarang,
+      nama: barang?.nama,
+      jumlah: jumlahKeluar.toString(),
+      kategori: barang?.kategori,
+      alasan: '',
+      tanggal: new Date().toISOString(),
+      type: 'Barang Keluar',
+    };
+
+    const updatedDataHistory = [...existingDataHistory, newDataHistory];
+    LocalStorage.setItem('historyItems', updatedDataHistory);
 
     // Update jumlah di data lama
     const updatedData = allData

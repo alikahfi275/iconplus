@@ -42,6 +42,11 @@ const BarangMasukScreen = () => {
       const rawData = LocalStorage.getItem('incomingItems');
       const existingData = Array.isArray(rawData) ? rawData : [];
 
+      const rawDataHistory = LocalStorage.getItem('historyItems');
+      const existingDataHistory = Array.isArray(rawDataHistory)
+        ? rawDataHistory
+        : [];
+
       const newData = {
         id: Date.now(),
         kode: kodeBarang,
@@ -51,8 +56,22 @@ const BarangMasukScreen = () => {
         gambar: gambarBarang,
       };
 
+      const newDataHistory = {
+        id: Date.now(),
+        kode: kodeBarang,
+        nama: namaBarang,
+        jumlah: jumlahBarang,
+        kategori: kategori,
+        alasan: '',
+        tanggal: new Date().toISOString(),
+        type: 'Barang Masuk',
+      };
+
       const updatedData = [...existingData, newData];
       LocalStorage.setItem('incomingItems', updatedData);
+
+      const updatedDataHistory = [...existingDataHistory, newDataHistory];
+      LocalStorage.setItem('historyItems', updatedDataHistory);
 
       Toast.show({
         type: ALERT_TYPE.SUCCESS,
