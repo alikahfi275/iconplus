@@ -12,6 +12,7 @@ import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
 import {useEffect} from 'react';
 import {Platform} from 'react-native';
 import SplashScreen from 'react-native-splash-screen';
+import {LocalStorage} from './src/utils/database/storage';
 
 const Stack = createStackNavigator();
 
@@ -21,10 +22,12 @@ export default function App() {
       if (Platform.OS === 'android') SplashScreen.hide();
     }, 1500);
   }, []);
+
+  const isLogin = LocalStorage.getItem('isLogin');
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="Login"
+        initialRouteName={isLogin ? 'Home' : 'Login'}
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />

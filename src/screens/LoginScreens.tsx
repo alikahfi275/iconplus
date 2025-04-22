@@ -11,11 +11,23 @@ import {AccountImage} from '../utils/image';
 import {TextInput} from 'react-native-gesture-handler';
 import Icons from '../components/Icons';
 import {useNavigation} from '@react-navigation/native';
+import {LocalStorage} from '../utils/database/storage';
 
 const LoginScreens = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [massage, setMassage] = useState('');
   const navigation: any = useNavigation();
+
+  const validLogin = () => {
+    if (email === 'admin' && password === 'admin1234') {
+      navigation.navigate('Home');
+      setMassage('');
+      LocalStorage.setItem('isLogin', true);
+    } else {
+      setMassage('Username atau Password Salah');
+    }
+  };
   return (
     <View
       style={{
@@ -81,6 +93,11 @@ const LoginScreens = () => {
           placeholderTextColor={'#b2b2b2'}
         />
       </View>
+      {massage && (
+        <Text style={{textAlign: 'center', marginTop: 10, color: '#d63a3a'}}>
+          {massage}
+        </Text>
+      )}
 
       <TouchableOpacity
         style={{
@@ -90,7 +107,7 @@ const LoginScreens = () => {
           marginTop: 30,
           padding: 10,
         }}
-        onPress={() => navigation.navigate('Home')}>
+        onPress={validLogin}>
         <Text style={{textAlign: 'center', color: 'white', fontSize: 20}}>
           Sedang Tahap Pengembangan
         </Text>
