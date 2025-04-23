@@ -101,20 +101,50 @@ const BarangReturnScreen = () => {
       </View>
       <View style={{flexDirection: 'row', marginHorizontal: 20, marginTop: 10}}>
         <View style={{flex: 0.5}}>
-          <Text>Nama Barang</Text>
+          <Text
+            style={{
+              color: '#4c4c4c',
+            }}>
+            Nama Barang
+          </Text>
         </View>
-        <Text>: </Text>
+        <Text
+          style={{
+            color: '#4c4c4c',
+          }}>
+          :{' '}
+        </Text>
         <View style={{flex: 1}}>
-          <Text>{barang?.nama}</Text>
+          <Text
+            style={{
+              color: '#4c4c4c',
+            }}>
+            {barang?.nama}
+          </Text>
         </View>
       </View>
       <View style={{flexDirection: 'row', marginHorizontal: 20}}>
         <View style={{flex: 0.5}}>
-          <Text>Kategori Barang</Text>
+          <Text
+            style={{
+              color: '#4c4c4c',
+            }}>
+            Kategori Barang
+          </Text>
         </View>
-        <Text>: </Text>
+        <Text
+          style={{
+            color: '#4c4c4c',
+          }}>
+          :{' '}
+        </Text>
         <View style={{flex: 1}}>
-          <Text>{barang?.kategori}</Text>
+          <Text
+            style={{
+              color: '#4c4c4c',
+            }}>
+            {barang?.kategori}
+          </Text>
         </View>
       </View>
       {message && (

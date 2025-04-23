@@ -2,7 +2,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from '../iconplus/src/screens/HomeScreen';
-import Login from '../iconplus/src/screens/LoginScreens';
+import Login from './src/screens/LoginScreen';
 import BarangKeluar from '../iconplus/src/screens/BarangKeluarScreen';
 import BarangMasuk from '../iconplus/src/screens/BarangMasukScreen';
 import StokBarang from '../iconplus/src/screens/StokBarangScreen';

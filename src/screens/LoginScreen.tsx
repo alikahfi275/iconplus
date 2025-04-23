@@ -13,7 +13,7 @@ import Icons from '../components/Icons';
 import {useNavigation} from '@react-navigation/native';
 import {LocalStorage} from '../utils/database/storage';
 
-const LoginScreens = () => {
+const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [massage, setMassage] = useState('');
@@ -43,7 +43,13 @@ const LoginScreens = () => {
         />
       </View>
       <View style={{alignItems: 'center'}}>
-        <Text style={{fontSize: 30, fontWeight: '700', marginTop: 5}}>
+        <Text
+          style={{
+            fontSize: 30,
+            fontWeight: '700',
+            marginTop: 5,
+            color: '#4c4c4c',
+          }}>
           LOGIN
         </Text>
       </View>
@@ -116,4 +122,4 @@ const LoginScreens = () => {
   );
 };
 
-export default LoginScreens;
+export default LoginScreen;

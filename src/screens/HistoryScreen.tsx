@@ -88,47 +88,105 @@ const HistoryScreen = () => {
               <View style={{marginLeft: 10, flex: 1}}>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 0.4}}>
-                    <Text style={{fontWeight: '600'}}>Kode</Text>
+                    <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                      Kode
+                    </Text>
                   </View>
-                  <Text>: </Text>
+                  <Text
+                    style={{
+                      color: '#4c4c4c',
+                    }}>
+                    :{' '}
+                  </Text>
                   <View style={{flex: 1}}>
-                    <Text>{item.kode}</Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
+                      {item.kode}
+                    </Text>
                   </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 0.4}}>
-                    <Text style={{fontWeight: '600'}}>Nama</Text>
+                    <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                      Nama
+                    </Text>
                   </View>
-                  <Text>: </Text>
+                  <Text
+                    style={{
+                      color: '#4c4c4c',
+                    }}>
+                    :{' '}
+                  </Text>
                   <View style={{flex: 1}}>
-                    <Text>{item.nama}</Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
+                      {item.nama}
+                    </Text>
                   </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 0.4}}>
-                    <Text style={{fontWeight: '600'}}>Jumlah</Text>
+                    <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                      Jumlah
+                    </Text>
                   </View>
-                  <Text>: </Text>
+                  <Text
+                    style={{
+                      color: '#4c4c4c',
+                    }}>
+                    :{' '}
+                  </Text>
                   <View style={{flex: 1}}>
-                    <Text>{item.jumlah}</Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
+                      {item.jumlah}
+                    </Text>
                   </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 0.4}}>
-                    <Text style={{fontWeight: '600'}}>Kaegori</Text>
+                    <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                      Kaegori
+                    </Text>
                   </View>
-                  <Text>: </Text>
+                  <Text
+                    style={{
+                      color: '#4c4c4c',
+                    }}>
+                    :{' '}
+                  </Text>
                   <View style={{flex: 1}}>
-                    <Text>{item.kategori}</Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
+                      {item.kategori}
+                    </Text>
                   </View>
                 </View>
                 <View style={{flexDirection: 'row'}}>
                   <View style={{flex: 0.4}}>
-                    <Text style={{fontWeight: '600'}}>Tanggal</Text>
+                    <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                      Tanggal
+                    </Text>
                   </View>
-                  <Text>: </Text>
+                  <Text
+                    style={{
+                      color: '#4c4c4c',
+                    }}>
+                    :{' '}
+                  </Text>
                   <View style={{flex: 1}}>
-                    <Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
                       {moment(item.tanggal).format('DD-MMM-YYYY HH:mm')}
                     </Text>
                   </View>
@@ -136,11 +194,23 @@ const HistoryScreen = () => {
                 {item?.alasan && (
                   <View style={{flexDirection: 'row'}}>
                     <View style={{flex: 0.4}}>
-                      <Text style={{fontWeight: '600'}}>Alasan</Text>
+                      <Text style={{fontWeight: '600', color: '#4c4c4c'}}>
+                        Alasan
+                      </Text>
                     </View>
-                    <Text>: </Text>
+                    <Text
+                      style={{
+                        color: '#4c4c4c',
+                      }}>
+                      :{' '}
+                    </Text>
                     <View style={{flex: 1}}>
-                      <Text>{item?.alasan}</Text>
+                      <Text
+                        style={{
+                          color: '#4c4c4c',
+                        }}>
+                        {item?.alasan}
+                      </Text>
                     </View>
                   </View>
                 )}
