@@ -109,7 +109,7 @@ const LoginScreens = () => {
         }}
         onPress={validLogin}>
         <Text style={{textAlign: 'center', color: 'white', fontSize: 20}}>
-          Sedang Tahap Pengembangan
+          Login
         </Text>
       </TouchableOpacity>
     </View>
