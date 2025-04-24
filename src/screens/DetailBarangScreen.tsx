@@ -2,7 +2,7 @@ import {View, Text, StatusBar, ImageBackground, Image} from 'react-native';
 import React from 'react';
 import {BgHome} from '../utils/image';
 
-const DetailBarang = (props: any) => {
+const DetailBarangScreen = (props: any) => {
   const {data} = props.route.params;
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
@@ -85,4 +85,4 @@ const DetailBarang = (props: any) => {
   );
 };
 
-export default DetailBarang;
+export default DetailBarangScreen;

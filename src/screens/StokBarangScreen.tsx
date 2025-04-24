@@ -136,6 +136,7 @@ const StokBarangScreen = () => {
             <Icons name="trash" type="Entypo" size={40} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate('EditTokoBarang')}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',

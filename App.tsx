@@ -8,7 +8,8 @@ import BarangMasuk from '../iconplus/src/screens/BarangMasukScreen';
 import StokBarang from '../iconplus/src/screens/StokBarangScreen';
 import History from '../iconplus/src/screens/HistoryScreen';
 import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
-import DetailBarang from '../iconplus/src/screens/DetailBarang';
+import DetailBarang from './src/screens/DetailBarangScreen';
+import EditTokoBarang from './src/screens/EditTokoBarang';
 
 import {useEffect} from 'react';
 import {Platform} from 'react-native';
@@ -38,6 +39,7 @@ export default function App() {
         <Stack.Screen name="History" component={History} />
         <Stack.Screen name="BarangReturn" component={BarangReturn} />
         <Stack.Screen name="DetailBarang" component={DetailBarang} />
+        <Stack.Screen name="EditTokoBarang" component={EditTokoBarang} />
       </Stack.Navigator>
     </NavigationContainer>
   );
