@@ -5,9 +5,18 @@ import {
   Image,
   TouchableOpacity,
   Platform,
+  ImageBackground,
 } from 'react-native';
 import React, {useEffect} from 'react';
-import {BannerImage} from '../utils/image';
+import {
+  BannerImage,
+  BgHome,
+  menuKeluar,
+  menuMasuk,
+  menuRetur,
+  menuServis,
+  menuToko,
+} from '../utils/image';
 import Icons from '../components/Icons';
 import Card from '../components/Card';
 import {useNavigation} from '@react-navigation/native';
@@ -50,94 +59,71 @@ const HomeScreen = () => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#f0f7fa" barStyle="dark-content" />
-      <Image
-        source={BannerImage}
-        style={{width: '100%', height: 250}}
-        resizeMode="stretch"
-      />
-      <Text
-        style={{
-          textAlign: 'center',
-          fontSize: 30,
-          color: '#72B4D3',
-          fontWeight: '700',
-          marginTop: -190,
-        }}>
-        DASHBOARD
-      </Text>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 25,
-          marginTop: 30,
-        }}>
-        <Card
-          type="MaterialIcons"
-          icon="move-to-inbox"
-          title="Barang Masuk"
-          onPress={() => navigation.navigate('BarangMasuk')}
-        />
-        <Card
-          type="MaterialIcons"
-          icon="outbox"
-          title="Barang Keluar"
-          onPress={() => navigation.navigate('BarangKeluar')}
-        />
-      </View>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          marginHorizontal: 25,
-          marginTop: 30,
-        }}>
-        <Card
-          type="MaterialIcons"
-          icon="markunread-mailbox"
-          title="Barang Return"
-          onPress={() => navigation.navigate('BarangReturn')}
-        />
-        <Card
-          type="MaterialIcons"
-          icon="all-inbox"
-          title="Stok Barang"
-          onPress={() => navigation.navigate('StokBarang')}
-        />
-      </View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('History')}
-        style={{
-          padding: 20,
-          borderRadius: 15,
-          backgroundColor: 'white',
-          height: 150,
-          alignItems: 'center',
-          justifyContent: 'center',
-          shadowColor: '#72B4D3',
-          shadowOffset: {
-            width: 1,
-            height: 7,
-          },
-          shadowOpacity: 0.41,
-          shadowRadius: 9.11,
-          elevation: 14,
-          marginTop: 25,
-          marginHorizontal: 25,
-        }}>
-        <Icons name="toolbox" size={60} color="#72B4D3" />
-        <Text
+      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
+      <ImageBackground source={BgHome} style={{flex: 1}}>
+        <View style={{backgroundColor: '#018082'}}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 30,
+              color: 'black',
+              fontWeight: '700',
+              marginVertical: 5,
+            }}>
+            BERANDA UTAMA
+          </Text>
+        </View>
+
+        <View
           style={{
-            fontSize: 14,
-            fontWeight: '500',
-            marginTop: 5,
-            textAlign: 'center',
-            color: '#4c4c4c',
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            marginHorizontal: 15,
+            marginTop: 50,
           }}>
-          History
-        </Text>
-      </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('BarangMasuk')}>
+            <Image
+              source={menuMasuk}
+              style={{height: 140, width: 110}}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{marginHorizontal: 10}}
+            onPress={() => navigation.navigate('BarangKeluar')}>
+            <Image
+              source={menuKeluar}
+              style={{height: 140, width: 110}}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('BarangReturn')}>
+            <Image
+              source={menuRetur}
+              style={{height: 140, width: 110}}
+              resizeMode="contain"
+            />
+          </TouchableOpacity>
+        </View>
+        <TouchableOpacity
+          style={{marginHorizontal: 15, marginTop: 20}}
+          onPress={() => navigation.navigate('StokBarang')}>
+          <Image
+            source={menuToko}
+            style={{height: 200, width: 'auto'}}
+            resizeMode="stretch"
+          />
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{marginHorizontal: 15, marginTop: 20}}
+          onPress={() => navigation.navigate('History')}>
+          <Image
+            source={menuServis}
+            style={{height: 200, width: 'auto'}}
+            resizeMode="stretch"
+          />
+        </TouchableOpacity>
+      </ImageBackground>
     </View>
   );
 };
