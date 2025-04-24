@@ -2,18 +2,18 @@ import {
   View,
   Text,
   StatusBar,
-  TextInput,
   FlatList,
   Image,
   ImageBackground,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React from 'react';
 import Icons from '../components/Icons';
-import {LocalStorage} from '../utils/database/storage';
-import {BannerImage, BgHome, NoImage} from '../utils/image';
+import {BgHome, NoImage} from '../utils/image';
+import {useNavigation} from '@react-navigation/native';
 
 const StokBarangScreen = () => {
+  const navigation: any = useNavigation();
   const dummyData = [
     {
       kodeBarang: 1,
@@ -68,7 +68,8 @@ const StokBarangScreen = () => {
         <FlatList
           data={dummyData}
           renderItem={({item}) => (
-            <View
+            <TouchableOpacity
+              onPress={() => navigation.navigate('DetailBarang', {data: item})}
               style={{
                 backgroundColor: 'white',
                 marginHorizontal: 15,
@@ -104,7 +105,7 @@ const StokBarangScreen = () => {
                   {item.stokBarang}
                 </Text>
               </View>
-            </View>
+            </TouchableOpacity>
           )}
         />
         <View
