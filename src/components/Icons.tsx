@@ -11,7 +11,7 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 
 interface Props {
-  name: String;
+  name: string;
   solid?: boolean;
   size: number;
   style?: ViewStyle;
