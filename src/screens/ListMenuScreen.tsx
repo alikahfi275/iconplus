@@ -2,7 +2,7 @@ import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {BgHome} from '../utils/image';
 
-const ListMenuMasukScreen = (props: any) => {
+const ListMenuScreen = (props: any) => {
   const isMasuk = props?.route?.params?.isMasuk || false;
   const isKeluar = props?.route?.params?.isKeluar || false;
   return (
@@ -106,4 +106,4 @@ const ListMenuMasukScreen = (props: any) => {
   );
 };
 
-export default ListMenuMasukScreen;
+export default ListMenuScreen;

@@ -79,9 +79,7 @@ const HomeScreen = () => {
             marginTop: 50,
           }}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('ListMenuMasuk', {isMasuk: true})
-            }>
+            onPress={() => navigation.navigate('ListMenu', {isMasuk: true})}>
             <Image
               source={menuMasuk}
               style={{height: 140, width: 110}}
@@ -90,9 +88,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{marginHorizontal: 10}}
-            onPress={() =>
-              navigation.navigate('ListMenuMasuk', {isKeluar: true})
-            }>
+            onPress={() => navigation.navigate('ListMenu', {isKeluar: true})}>
             <Image
               source={menuKeluar}
               style={{height: 140, width: 110}}
@@ -100,9 +96,7 @@ const HomeScreen = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('ListMenuMasuk', {isReturn: true})
-            }>
+            onPress={() => navigation.navigate('ListMenu', {isReturn: true})}>
             <Image
               source={menuRetur}
               style={{height: 140, width: 110}}
