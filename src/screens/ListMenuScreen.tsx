@@ -1,10 +1,19 @@
 import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import React from 'react';
 import {BgHome} from '../utils/image';
+import {useNavigation} from '@react-navigation/native';
 
 const ListMenuScreen = (props: any) => {
+  const navigation: any = useNavigation();
   const isMasuk = props?.route?.params?.isMasuk || false;
   const isKeluar = props?.route?.params?.isKeluar || false;
+  const isReturn = props?.route?.params?.isReturn || false;
+
+  const nameRouter = isMasuk
+    ? 'BarangMasuk'
+    : isKeluar
+    ? 'BarangKeluar'
+    : 'BarangReturn';
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
@@ -22,6 +31,7 @@ const ListMenuScreen = (props: any) => {
         </Text>
         <View style={{flex: 1}}>
           <TouchableOpacity
+            onPress={() => navigation.navigate(nameRouter, {isToko: true})}
             style={{
               backgroundColor: '#BFFEC6',
               alignItems: 'center',
@@ -41,6 +51,7 @@ const ListMenuScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate(nameRouter, {isService: true})}
             style={{
               backgroundColor: '#BFFEC6',
               alignItems: 'center',
