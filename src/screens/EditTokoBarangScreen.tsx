@@ -12,7 +12,7 @@ import {BgHome, NoImage} from '../utils/image';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
 
-const EditBarangScreen = () => {
+const EditBarangScreen = (props: any) => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [namaBarang, setNamaBarang] = useState('');
   const [stokBarang, setStokBarang] = useState('');
@@ -21,6 +21,8 @@ const EditBarangScreen = () => {
   const [gambar, setGambar] = useState(null);
 
   const [modalVisible, setModalVisible] = useState(false);
+
+  const isService = props?.route?.params?.isService || false;
 
   const kodeBarangDummy = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
@@ -53,7 +55,7 @@ const EditBarangScreen = () => {
             backgroundColor: '#018082',
             paddingVertical: 10,
           }}>
-          Edit Barang Toko
+          Edit Barang {isService ? 'Service' : 'Toko'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>

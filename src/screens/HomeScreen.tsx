@@ -116,7 +116,7 @@ const HomeScreen = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={{marginHorizontal: 15, marginTop: 20}}
-          onPress={() => navigation.navigate('History')}>
+          onPress={() => navigation.navigate('StokBarangServis')}>
           <Image
             source={menuServis}
             style={{height: 200, width: 'auto'}}

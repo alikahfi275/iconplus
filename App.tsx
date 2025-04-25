@@ -6,7 +6,7 @@ import Login from './src/screens/LoginScreen';
 import BarangKeluar from '../iconplus/src/screens/BarangKeluarScreen';
 import BarangMasuk from '../iconplus/src/screens/BarangMasukScreen';
 import StokBarang from '../iconplus/src/screens/StokBarangScreen';
-import History from '../iconplus/src/screens/HistoryScreen';
+import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
 import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
 import DetailBarang from './src/screens/DetailBarangScreen';
 import EditTokoBarang from './src/screens/EditTokoBarangScreen';
@@ -38,7 +38,7 @@ export default function App() {
         <Stack.Screen name="BarangKeluar" component={BarangKeluar} />
         <Stack.Screen name="BarangMasuk" component={BarangMasuk} />
         <Stack.Screen name="StokBarang" component={StokBarang} />
-        <Stack.Screen name="History" component={History} />
+        <Stack.Screen name="StokBarangServis" component={StokBarangServis} />
         <Stack.Screen name="BarangReturn" component={BarangReturn} />
         <Stack.Screen name="DetailBarang" component={DetailBarang} />
         <Stack.Screen name="EditTokoBarang" component={EditTokoBarang} />

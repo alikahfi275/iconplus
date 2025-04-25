@@ -10,10 +10,12 @@ import {BgHome, NoImage} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
 
-const CariBarangTokoScreen = () => {
+const CariBarangTokoScreen = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
   const [namaBarang, setNamaBarang] = useState('');
   const [gambar, setGambar] = useState(null);
+
+  const isService = props?.route?.params?.isService || false;
 
   const kodeBarangDummy = [
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
@@ -42,7 +44,7 @@ const CariBarangTokoScreen = () => {
             backgroundColor: '#018082',
             paddingVertical: 10,
           }}>
-          Cari Barang Toko
+          Cari Barang {isService ? 'Service' : 'Toko'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>
