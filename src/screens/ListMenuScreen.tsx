@@ -72,6 +72,14 @@ const ListMenuScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('RiwayatBarang', {
+                isToko: true,
+                isMasuk,
+                isKeluar,
+                isReturn,
+              })
+            }
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',
@@ -92,6 +100,14 @@ const ListMenuScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('RiwayatBarang', {
+                isService: true,
+                isMasuk,
+                isKeluar,
+                isReturn,
+              })
+            }
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',
