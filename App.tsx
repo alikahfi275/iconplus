@@ -9,9 +9,9 @@ import StokBarang from '../iconplus/src/screens/StokBarangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
 import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
 import DetailBarang from './src/screens/DetailBarangScreen';
-import EditTokoBarang from './src/screens/EditTokoBarangScreen';
-import HapusBarangToko from './src/screens/HapusBarangTokoScreen';
-import CariBarangToko from './src/screens/CariBarangTokoScreen';
+import EditBarang from './src/screens/EditBarangScreen';
+import HapusBarang from './src/screens/HapusBarangScreen';
+import CariBarang from './src/screens/CariBarangScreen';
 import ListMenuMasuk from './src/screens/ListMenuMasukScreen';
 
 import {useEffect} from 'react';
@@ -42,9 +42,9 @@ export default function App() {
         <Stack.Screen name="StokBarangServis" component={StokBarangServis} />
         <Stack.Screen name="BarangReturn" component={BarangReturn} />
         <Stack.Screen name="DetailBarang" component={DetailBarang} />
-        <Stack.Screen name="EditTokoBarang" component={EditTokoBarang} />
-        <Stack.Screen name="HapusBarangToko" component={HapusBarangToko} />
-        <Stack.Screen name="CariBarangToko" component={CariBarangToko} />
+        <Stack.Screen name="EditBarang" component={EditBarang} />
+        <Stack.Screen name="HapusBarang" component={HapusBarang} />
+        <Stack.Screen name="CariBarang" component={CariBarang} />
         <Stack.Screen name="ListMenuMasuk" component={ListMenuMasuk} />
       </Stack.Navigator>
     </NavigationContainer>

@@ -116,9 +116,7 @@ const StokBarangServisScreen = () => {
             flexDirection: 'row',
           }}>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('CariBarangToko', {isService: true})
-            }
+            onPress={() => navigation.navigate('CariBarang', {isService: true})}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',
@@ -130,7 +128,7 @@ const StokBarangServisScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() =>
-              navigation.navigate('HapusBarangToko', {isService: true})
+              navigation.navigate('HapusBarang', {isService: true})
             }
             style={{
               alignItems: 'center',
@@ -142,9 +140,7 @@ const StokBarangServisScreen = () => {
             <Icons name="trash" type="Entypo" size={40} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('EditTokoBarang', {isService: true})
-            }
+            onPress={() => navigation.navigate('EditBarang', {isService: true})}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',

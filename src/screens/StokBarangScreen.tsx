@@ -116,7 +116,7 @@ const StokBarangScreen = () => {
             flexDirection: 'row',
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('CariBarangToko')}
+            onPress={() => navigation.navigate('CariBarang')}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',
@@ -127,7 +127,7 @@ const StokBarangScreen = () => {
             <Icons name="search" type="MaterialIcons" size={40} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('HapusBarangToko')}
+            onPress={() => navigation.navigate('HapusBarang')}
             style={{
               alignItems: 'center',
               backgroundColor: '#FE0000',
@@ -138,7 +138,7 @@ const StokBarangScreen = () => {
             <Icons name="trash" type="Entypo" size={40} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('EditTokoBarang')}
+            onPress={() => navigation.navigate('EditBarang')}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',
