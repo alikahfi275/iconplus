@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
+import ModalList from '../components/ModalList';
 
 const EditBarangScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
@@ -20,11 +21,27 @@ const EditBarangScreen = () => {
   const [satuanBarang, setSatuanBarang] = useState('');
   const [gambar, setGambar] = useState(null);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const kodeBarangDummy = [
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
+  ];
+
   const uploadGambar = () => {};
+
+  const handleSelect = (item: any) => {
+    setKodeBarang(item);
+  };
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
+        <ModalList
+          modalVisible={modalVisible}
+          setModalVisible={setModalVisible}
+          items={kodeBarangDummy}
+          handleSelect={(item: any) => handleSelect(item)}
+        />
         <Text
           style={{
             fontSize: 22,
@@ -65,7 +82,12 @@ const EditBarangScreen = () => {
               }}>
               {kodeBarang ? kodeBarang : '0'}
             </Text>
-            <Icons name="arrow-down-drop-circle" size={20} color="black" />
+            <Icons
+              name="arrow-down-drop-circle"
+              size={20}
+              color="black"
+              onPress={() => setModalVisible(true)}
+            />
           </View>
 
           <Text
