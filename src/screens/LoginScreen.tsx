@@ -13,29 +13,52 @@ import Icons from '../components/Icons';
 import {useNavigation} from '@react-navigation/native';
 import {LocalStorage} from '../utils/database/storage';
 import {User} from '../utils/icons';
+import axios from 'axios';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const LoginScreen = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [massage, setMassage] = useState('');
   const [showEye, setShowEye] = useState(false);
   const navigation: any = useNavigation();
+  const [showSpinner, setShowSpinner] = useState(false);
 
-  const validLogin = () => {
-    if (email === 'admin' && password === 'admin1234') {
-      navigation.navigate('Home');
-      setMassage('');
-      LocalStorage.setItem('isLogin', true);
-    } else {
-      setMassage('Username atau Password Salah');
+  const handleLogin = async () => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.post(
+        'http://10.224.22.28:8888/inven-api/login.php',
+        {
+          username,
+          password,
+        },
+      );
+      console.log('====================================');
+      console.log(response);
+      console.log('====================================');
+      if (response.data.status === 'success') {
+        navigation.navigate('Home');
+        setMassage('');
+        LocalStorage.setItem('isLogin', true);
+        setShowSpinner(false);
+      } else {
+        setMassage('Username atau Password Salah');
+        setShowSpinner(false);
+      }
+    } catch (error) {
+      setMassage('Connection Error');
+      setShowSpinner(false);
     }
   };
+
   return (
     <View
       style={{
         flex: 1,
         backgroundColor: 'white',
       }}>
+      <Spinner visible={showSpinner} textContent={'Loading...'} />
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
       <ImageBackground source={BgLogin} style={{flex: 1}}>
         <View
@@ -78,8 +101,8 @@ const LoginScreen = () => {
           <Image source={User} style={{width: 30, height: 30}} />
           <TextInput
             style={{fontSize: 18, flex: 1, color: '#4c4c4c'}}
-            onChangeText={setEmail}
-            value={email}
+            onChangeText={setUsername}
+            value={username}
             placeholder="Username"
             placeholderTextColor={'#b2b2b2'}
           />
@@ -125,7 +148,7 @@ const LoginScreen = () => {
               marginTop: 30,
               padding: 10,
             }}
-            onPress={validLogin}>
+            onPress={handleLogin}>
             <Text
               style={{
                 textAlign: 'center',
