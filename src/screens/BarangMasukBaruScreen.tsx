@@ -1,0 +1,159 @@
+import {
+  View,
+  Text,
+  StatusBar,
+  ImageBackground,
+  TextInput,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import React, {useState} from 'react';
+import {BgHome, NoImage} from '../utils/image';
+
+const BarangMasukBaruScreen = (props: any) => {
+  const [kodeBarang, setKodeBarang] = useState('');
+  const [namaBarang, setNamaBarang] = useState('');
+  const [jumlahBarang, setJumlahBarang] = useState('');
+  const [merekBarang, setMerekBarang] = useState('');
+  const [satuanBarang, setSatuanBarang] = useState('');
+  const [gambar, setGambar] = useState(null);
+
+  const isToko = props?.route?.params?.isToko || false;
+  return (
+    <View style={{flex: 1, backgroundColor: 'white'}}>
+      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
+      <ImageBackground source={BgHome} style={{flex: 1}}>
+        <View style={{backgroundColor: '#018082'}}>
+          <Text
+            style={{
+              textAlign: 'center',
+              fontSize: 28,
+              color: 'black',
+              fontWeight: '700',
+              marginVertical: 5,
+            }}>
+            Barang Masuk {isToko ? 'Toko' : 'Service'} Baru
+          </Text>
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 20}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Kode Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={kodeBarang}
+            onChangeText={text => setKodeBarang(text)}
+            placeholder="Masukan Kode Barang"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Nama Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={namaBarang}
+            onChangeText={text => setNamaBarang(text)}
+            placeholder="Masukan Nama Barang"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Jumlah Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={jumlahBarang}
+            onChangeText={text => setJumlahBarang(text)}
+            placeholder="Masukan Jumlah Barang"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Merek Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={merekBarang}
+            onChangeText={text => setMerekBarang(text)}
+            placeholder="Masukan Merek Barang"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Satuan Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={satuanBarang}
+            onChangeText={text => setSatuanBarang(text)}
+            placeholder="Masukan Satuan Barang"
+          />
+        </View>
+        <Image
+          source={gambar ? {uri: gambar} : NoImage}
+          style={{width: 100, height: 100, alignSelf: 'center', marginTop: 5}}
+        />
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            marginHorizontal: 20,
+            marginBottom: 20,
+            backgroundColor: '#018082',
+            alignItems: 'center',
+            marginTop: 20,
+            paddingVertical: 10,
+          }}>
+          <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
+            UPLOAD GAMBAR
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {}}
+          style={{
+            marginHorizontal: 20,
+            marginBottom: 20,
+            backgroundColor: '#018082',
+            alignItems: 'center',
+            paddingVertical: 10,
+          }}>
+          <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
+            SIMPAN
+          </Text>
+        </TouchableOpacity>
+      </ImageBackground>
+    </View>
+  );
+};
+
+export default BarangMasukBaruScreen;

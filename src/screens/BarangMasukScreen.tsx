@@ -11,8 +11,10 @@ import React, {useState} from 'react';
 import {BgHome} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
+import {useNavigation} from '@react-navigation/native';
 
 const BarangMasukScreen = (props: any) => {
+  const navigation: any = useNavigation();
   const isToko = props?.route?.params?.isToko || false;
   const [modalVisible, setModalVisible] = useState(false);
   const [namaBarang, setNamaBarang] = useState('');
@@ -119,6 +121,7 @@ const BarangMasukScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
+          onPress={() => navigation.navigate('BarangMasukBaru', {isToko})}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
