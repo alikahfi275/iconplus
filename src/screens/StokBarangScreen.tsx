@@ -126,6 +126,7 @@ const StokBarangScreen = () => {
             <Icons name="search" type="MaterialIcons" size={40} color="black" />
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate('HapusBarangToko')}
             style={{
               alignItems: 'center',
               backgroundColor: '#FE0000',
