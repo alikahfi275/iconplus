@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {
-  BannerImage,
   BgHome,
   menuKeluar,
   menuMasuk,
@@ -17,8 +16,6 @@ import {
   menuServis,
   menuToko,
 } from '../utils/image';
-import Icons from '../components/Icons';
-import Card from '../components/Card';
 import {useNavigation} from '@react-navigation/native';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
 
@@ -81,7 +78,10 @@ const HomeScreen = () => {
             marginHorizontal: 15,
             marginTop: 50,
           }}>
-          <TouchableOpacity onPress={() => navigation.navigate('BarangMasuk')}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('ListMenuMasuk', {isMasuk: true})
+            }>
             <Image
               source={menuMasuk}
               style={{height: 140, width: 110}}
@@ -90,14 +90,19 @@ const HomeScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{marginHorizontal: 10}}
-            onPress={() => navigation.navigate('BarangKeluar')}>
+            onPress={() =>
+              navigation.navigate('ListMenuMasuk', {isKeluar: true})
+            }>
             <Image
               source={menuKeluar}
               style={{height: 140, width: 110}}
               resizeMode="contain"
             />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('BarangReturn')}>
+          <TouchableOpacity
+            onPress={() =>
+              navigation.navigate('ListMenuMasuk', {isReturn: true})
+            }>
             <Image
               source={menuRetur}
               style={{height: 140, width: 110}}

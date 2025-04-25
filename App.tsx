@@ -12,6 +12,7 @@ import DetailBarang from './src/screens/DetailBarangScreen';
 import EditTokoBarang from './src/screens/EditTokoBarangScreen';
 import HapusBarangToko from './src/screens/HapusBarangTokoScreen';
 import CariBarangToko from './src/screens/CariBarangTokoScreen';
+import ListMenuMasuk from './src/screens/ListMenuMasukScreen';
 
 import {useEffect} from 'react';
 import {Platform} from 'react-native';
@@ -44,6 +45,7 @@ export default function App() {
         <Stack.Screen name="EditTokoBarang" component={EditTokoBarang} />
         <Stack.Screen name="HapusBarangToko" component={HapusBarangToko} />
         <Stack.Screen name="CariBarangToko" component={CariBarangToko} />
+        <Stack.Screen name="ListMenuMasuk" component={ListMenuMasuk} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -1,5 +1,4 @@
 const AccountImage = require('./account.png');
-const BannerImage = require('./banner.jpg');
 const NoImage = require('./defaultLogo.jpg');
 const BgLogin = require('./BackgroundLogin.jpg');
 const BgHome = require('./BackgroundScreen.jpg');
@@ -11,7 +10,6 @@ const menuServis = require('./menuServis.jpg');
 
 export {
   AccountImage,
-  BannerImage,
   NoImage,
   BgLogin,
   BgHome,
