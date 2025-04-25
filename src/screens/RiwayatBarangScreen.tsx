@@ -122,6 +122,14 @@ const RiwayatBarangScreen = (props: any) => {
           )}
         />
         <TouchableOpacity
+          onPress={() =>
+            props.navigation.navigate('CariRiwayatBarang', {
+              isMasuk,
+              isKeluar,
+              isReturn,
+              isToko,
+            })
+          }
           style={{
             position: 'absolute',
             bottom: 20,

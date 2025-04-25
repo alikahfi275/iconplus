@@ -15,6 +15,7 @@ import CariBarang from './src/screens/CariBarangScreen';
 import ListMenu from './src/screens/ListMenuScreen';
 import BarangMasukBaru from './src/screens/BarangMasukBaruScreen';
 import RiwayatBarang from '../iconplus/src/screens/RiwayatBarangScreen';
+import CariRiwayatBarang from '../iconplus/src/screens/CariRiwayatBarangScreen';
 
 import {useEffect} from 'react';
 import {Platform} from 'react-native';
@@ -50,6 +51,7 @@ export default function App() {
         <Stack.Screen name="ListMenu" component={ListMenu} />
         <Stack.Screen name="BarangMasukBaru" component={BarangMasukBaru} />
         <Stack.Screen name="RiwayatBarang" component={RiwayatBarang} />
+        <Stack.Screen name="CariRiwayatBarang" component={CariRiwayatBarang} />
       </Stack.Navigator>
     </NavigationContainer>
   );
