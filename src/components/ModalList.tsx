@@ -9,7 +9,7 @@ import {
 import React from 'react';
 
 const ModalList = (props: any) => {
-  const {modalVisible, setModalVisible, items, handleSelect} = props;
+  const {modalVisible, setModalVisible, items, handleSelect, title} = props;
   return (
     <Modal
       visible={modalVisible}
@@ -37,7 +37,7 @@ const ModalList = (props: any) => {
               marginBottom: 10,
               color: 'black',
             }}>
-            Pilih Kode Barang
+            Pilih {title}
           </Text>
           <ScrollView style={{maxHeight: 300}}>
             {items.map((item: any, index: number) => (

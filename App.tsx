@@ -11,6 +11,7 @@ import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
 import DetailBarang from './src/screens/DetailBarangScreen';
 import EditTokoBarang from './src/screens/EditTokoBarangScreen';
 import HapusBarangToko from './src/screens/HapusBarangTokoScreen';
+import CariBarangToko from './src/screens/CariBarangTokoScreen';
 
 import {useEffect} from 'react';
 import {Platform} from 'react-native';
@@ -42,6 +43,7 @@ export default function App() {
         <Stack.Screen name="DetailBarang" component={DetailBarang} />
         <Stack.Screen name="EditTokoBarang" component={EditTokoBarang} />
         <Stack.Screen name="HapusBarangToko" component={HapusBarangToko} />
+        <Stack.Screen name="CariBarangToko" component={CariBarangToko} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -116,6 +116,7 @@ const StokBarangScreen = () => {
             flexDirection: 'row',
           }}>
           <TouchableOpacity
+            onPress={() => navigation.navigate('CariBarangToko')}
             style={{
               alignItems: 'center',
               backgroundColor: '#BFFEC6',

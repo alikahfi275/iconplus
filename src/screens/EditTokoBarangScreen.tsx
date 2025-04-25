@@ -37,6 +37,7 @@ const EditBarangScreen = () => {
       contentContainerStyle={{backgroundColor: '#E6F1F7', flexGrow: 1}}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
         <ModalList
+          title="Kode Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           items={kodeBarangDummy}
