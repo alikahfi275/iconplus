@@ -33,6 +33,7 @@ const BarangMasukScreen = (props: any) => {
         kode_barang: itemPick.kode_barang,
         jumlah_masuk: jumlah,
       });
+      setJumlah('');
     } catch (error) {
       console.log('Error fetching data:', error);
     }
