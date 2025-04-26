@@ -7,11 +7,14 @@ import {
   Button,
   TouchableOpacity,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BgHome} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
 import {useNavigation} from '@react-navigation/native';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
+import Spinner from 'react-native-loading-spinner-overlay';
 
 const BarangMasukScreen = (props: any) => {
   const navigation: any = useNavigation();
@@ -20,22 +23,43 @@ const BarangMasukScreen = (props: any) => {
   const [namaBarang, setNamaBarang] = useState('');
   const [jumlah, setJumlah] = useState('');
 
-  const namaBarangDummy = [
-    'Pensil',
-    'Penghapus',
-    'Penggaris',
-    'Penggaris',
-    'Penggaris',
-  ];
+  const [dataGudang, setDataGudang] = useState([]);
+  const [showSpinner, setShowSpinner] = useState(false);
+
+  const getListBarangGudang = async () => {
+    setShowSpinner(true);
+    try {
+      const response = await axios.get(`${BASE_URL}barang/gudang/list.php`);
+      if (response.data.status === 'success') {
+        const mappedData = response.data.data.map(
+          (item: any) => item.nama_barang,
+        );
+
+        setDataGudang(mappedData);
+        setShowSpinner(false);
+      } else {
+        setShowSpinner(false);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+      setShowSpinner(false);
+    }
+  };
+
+  useEffect(() => {
+    getListBarangGudang();
+  }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
+      <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
       <ImageBackground source={BgHome} style={{flex: 1}}>
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={namaBarangDummy}
+          items={dataGudang}
           handleSelect={(item: any) => setNamaBarang(item)}
         />
         <View style={{backgroundColor: '#018082'}}>

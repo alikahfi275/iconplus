@@ -1,9 +1,30 @@
 import {View, Text, StatusBar, ImageBackground, Image} from 'react-native';
-import React from 'react';
-import {BgHome} from '../utils/image';
+import React, {useEffect, useState} from 'react';
+import {BgHome, NoImage} from '../utils/image';
+import {BASE_URL} from '../utils/api/api';
+import axios from 'axios';
 
 const DetailBarangScreen = (props: any) => {
-  const {data} = props.route.params;
+  const {kodeBarang} = props?.route?.params;
+  const [detailItems, setDetailItems] = useState<any>({});
+
+  const getDetailBarang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}barang/gudang/detail.php?kode_barang=${kodeBarang}`,
+      );
+
+      if (response.data.status === 'success') {
+        setDetailItems(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getDetailBarang();
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
@@ -24,11 +45,11 @@ const DetailBarangScreen = (props: any) => {
               color: 'black',
               marginVertical: 5,
             }}>
-            KODE BARANG : {data?.kodeBarang}
+            KODE BARANG : {detailItems?.kode_barang}
           </Text>
         </View>
         <Image
-          source={{uri: data?.gambarBarang}}
+          source={detailItems?.gambar ? {uri: detailItems?.gambar} : NoImage}
           style={{
             width: 200,
             height: 200,
@@ -47,7 +68,7 @@ const DetailBarangScreen = (props: any) => {
             marginHorizontal: 20,
             marginTop: 20,
           }}>
-          {data?.namaBarang}
+          {detailItems?.nama_barang}
         </Text>
         <View
           style={{
@@ -65,7 +86,7 @@ const DetailBarangScreen = (props: any) => {
               color: 'black',
               marginVertical: 5,
             }}>
-            STOK : {data?.stokBarang} / {data?.satuanBarang}
+            STOK : {detailItems?.stok} / {detailItems?.satuan}
           </Text>
         </View>
         <Text
@@ -78,7 +99,7 @@ const DetailBarangScreen = (props: any) => {
             marginHorizontal: 20,
             marginTop: 20,
           }}>
-          MEREK : {data?.merekBarang}
+          MEREK : {detailItems?.merek}
         </Text>
       </ImageBackground>
     </View>

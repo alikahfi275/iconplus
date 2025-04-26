@@ -20,7 +20,7 @@ const StokBarangServisScreen = () => {
   const [showSpinner, setShowSpinner] = useState(false);
   const [dataService, setDataService] = useState([]);
 
-  const getListBarangGudang = async () => {
+  const getListBarangService = async () => {
     setShowSpinner(true);
     try {
       const response = await axios.get(`${BASE_URL}barang/service/list.php`);
@@ -37,7 +37,7 @@ const StokBarangServisScreen = () => {
   };
 
   useEffect(() => {
-    getListBarangGudang();
+    getListBarangService();
   }, []);
 
   return (
