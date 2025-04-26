@@ -9,6 +9,9 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import {BgHome, NoImage} from '../utils/image';
+import {BASE_URL} from '../utils/api/api';
+import axios from 'axios';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 const BarangMasukBaruScreen = (props: any) => {
   const [kodeBarang, setKodeBarang] = useState('');
@@ -17,8 +20,45 @@ const BarangMasukBaruScreen = (props: any) => {
   const [merekBarang, setMerekBarang] = useState('');
   const [satuanBarang, setSatuanBarang] = useState('');
   const [gambar, setGambar] = useState(null);
+  const isGudang = props?.route?.params?.isToko || false;
 
-  const isToko = props?.route?.params?.isToko || false;
+  const addItems = async () => {
+    const route = isGudang ? 'gudang' : 'service';
+    try {
+      await axios.post(`${BASE_URL}barang/${route}/create.php`, {
+        kode_barang: kodeBarang,
+        nama_barang: namaBarang,
+        stok: jumlahBarang,
+        satuan: satuanBarang,
+        merek: merekBarang,
+        gambar: gambar,
+      });
+      setGambar(null);
+      setKodeBarang('');
+      setNamaBarang('');
+      setJumlahBarang('');
+      setMerekBarang('');
+      setSatuanBarang('');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  const openPictures = () => {
+    ImageCropPicker.openPicker({
+      cropping: true,
+      width: 500,
+      height: 500,
+      cropperCircleOverlay: false,
+      includeBase64: true,
+    })
+      .then((imageResult: any) => {
+        const imageUri: any = `data:${imageResult.mime};base64,${imageResult.data}`;
+        setGambar(imageUri);
+      })
+      .catch(error => {});
+  };
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
@@ -32,7 +72,7 @@ const BarangMasukBaruScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk {isToko ? 'Toko' : 'Service'} Baru
+            Barang Masuk {isGudang ? 'Gudang' : 'Service'} Baru
           </Text>
         </View>
 
@@ -125,7 +165,7 @@ const BarangMasukBaruScreen = (props: any) => {
           style={{width: 100, height: 100, alignSelf: 'center', marginTop: 5}}
         />
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={openPictures}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
@@ -139,7 +179,7 @@ const BarangMasukBaruScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={addItems}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,

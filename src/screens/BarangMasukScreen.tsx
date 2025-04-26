@@ -18,24 +18,37 @@ import Spinner from 'react-native-loading-spinner-overlay';
 
 const BarangMasukScreen = (props: any) => {
   const navigation: any = useNavigation();
-  const isToko = props?.route?.params?.isToko || false;
+  const isGudang = props?.route?.params?.isToko || false;
   const [modalVisible, setModalVisible] = useState(false);
-  const [namaBarang, setNamaBarang] = useState('');
+  const [itemPick, setItemPick] = useState<any>({});
   const [jumlah, setJumlah] = useState('');
 
   const [dataGudang, setDataGudang] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
 
+  const updateJumlah = async () => {
+    let route = isGudang ? 'gudang' : 'service';
+    try {
+      await axios.post(`${BASE_URL}barang_masuk/${route}.php`, {
+        kode_barang: itemPick.kode_barang,
+        jumlah_masuk: jumlah,
+      });
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
   const getListBarangGudang = async () => {
+    const route = isGudang ? 'gudang' : 'service';
     setShowSpinner(true);
     try {
-      const response = await axios.get(`${BASE_URL}barang/gudang/list.php`);
+      const response = await axios.get(`${BASE_URL}barang/${route}/list.php`);
       if (response.data.status === 'success') {
-        const mappedData = response.data.data.map(
-          (item: any) => item.nama_barang,
-        );
+        // const mappedData = response.data.data.map(
+        //   (item: any) => item.nama_barang,
+        // );
 
-        setDataGudang(mappedData);
+        setDataGudang(response.data.data);
         setShowSpinner(false);
       } else {
         setShowSpinner(false);
@@ -60,7 +73,7 @@ const BarangMasukScreen = (props: any) => {
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           items={dataGudang}
-          handleSelect={(item: any) => setNamaBarang(item)}
+          handleSelect={(item: any) => setItemPick(item)}
         />
         <View style={{backgroundColor: '#018082'}}>
           <Text
@@ -71,7 +84,7 @@ const BarangMasukScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk {isToko ? 'Toko' : 'Service'}
+            Barang Masuk {isGudang ? 'Gudang' : 'Service'}
           </Text>
         </View>
 
@@ -97,10 +110,10 @@ const BarangMasukScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: namaBarang ? '600' : '300',
-                color: namaBarang ? 'black' : '#4c4c4c',
+                fontWeight: itemPick.nama_barang ? '600' : '300',
+                color: itemPick.nama_barang ? 'black' : '#4c4c4c',
               }}>
-              {namaBarang ? namaBarang : 'Nama Barang'}
+              {itemPick.nama_barang ? itemPick.nama_barang : 'Nama Barang'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -132,6 +145,7 @@ const BarangMasukScreen = (props: any) => {
           />
         </View>
         <TouchableOpacity
+          onPress={updateJumlah}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
@@ -145,7 +159,7 @@ const BarangMasukScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('BarangMasukBaru', {isToko})}
+          onPress={() => navigation.navigate('BarangMasukBaru', {isGudang})}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
@@ -154,7 +168,7 @@ const BarangMasukScreen = (props: any) => {
             paddingVertical: 10,
           }}>
           <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
-            BARANG MASUK {isToko ? 'TOKO' : 'SERVICE'} BARU
+            BARANG MASUK {isGudang ? 'TOKO' : 'SERVICE'} BARU
           </Text>
         </TouchableOpacity>
       </ImageBackground>
