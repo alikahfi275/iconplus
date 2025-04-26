@@ -15,6 +15,7 @@ import {LocalStorage} from '../utils/database/storage';
 import {User} from '../utils/icons';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
+import {BASE_URL} from '../utils/api/api';
 
 const LoginScreen = () => {
   const [username, setUsername] = useState('');
@@ -27,16 +28,10 @@ const LoginScreen = () => {
   const handleLogin = async () => {
     setShowSpinner(true);
     try {
-      const response = await axios.post(
-        'http://10.224.22.28:8888/inven-api/login.php',
-        {
-          username,
-          password,
-        },
-      );
-      console.log('====================================');
-      console.log(response);
-      console.log('====================================');
+      const response = await axios.post(`${BASE_URL}auth/login.php`, {
+        username,
+        password,
+      });
       if (response.data.status === 'success') {
         navigation.navigate('Home');
         setMassage('');
@@ -58,7 +53,7 @@ const LoginScreen = () => {
         flex: 1,
         backgroundColor: 'white',
       }}>
-      <Spinner visible={showSpinner} textContent={'Loading...'} />
+      <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
       <ImageBackground source={BgLogin} style={{flex: 1}}>
         <View

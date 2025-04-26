@@ -5,8 +5,8 @@ const BgHome = require('./BackgroundScreen.jpg');
 const menuMasuk = require('./menuMasuk.jpg');
 const menuKeluar = require('./menuKeluar.jpg');
 const menuRetur = require('./menuRetur.jpg');
-const menuToko = require('./menuToko.jpg');
 const menuServis = require('./menuServis.jpg');
+const menuGudang = require('./menuGudang.jpg');
 
 export {
   AccountImage,
@@ -16,6 +16,6 @@ export {
   menuMasuk,
   menuKeluar,
   menuRetur,
-  menuToko,
+  menuGudang,
   menuServis,
 };
