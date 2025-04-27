@@ -63,7 +63,7 @@ const ListBarangKeluarScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('RiwayatBarang')}
+            onPress={() => navigation.navigate('KeluarRiwayatGudang')}
             style={{
               backgroundColor: '#FE0000',
               alignItems: 'center',
@@ -82,7 +82,7 @@ const ListBarangKeluarScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('RiwayatBarang')}
+            onPress={() => navigation.navigate('KeluarRiwayatService')}
             style={{
               backgroundColor: '#FE0000',
               alignItems: 'center',

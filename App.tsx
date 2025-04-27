@@ -13,6 +13,9 @@ import MasukSearchRiwayat from './src/screens/MasukSearchRiwayatScreen';
 
 import KeluarGudang from './src/screens/KeluarGudangScreen';
 import KeluarService from './src/screens/KeluarServiceScreen';
+import KeluarRiwayatGudang from './src/screens/KeluarRiwayatGudangScreen';
+import KeluarRiwayatService from './src/screens/KeluarRiwayatServiceScreen';
+import KeluarSearchRiwayat from './src/screens/KeluarSearchRiwayatScreen';
 
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
@@ -21,7 +24,6 @@ import DetailBarang from './src/screens/DetailBarangScreen';
 import EditBarang from './src/screens/EditBarangScreen';
 import HapusBarang from './src/screens/HapusBarangScreen';
 import CariBarang from './src/screens/CariBarangScreen';
-import CariRiwayatBarang from '../iconplus/src/screens/CariRiwayatBarangScreen';
 import ListBarangMasukScreen from './src/screens/ListBarangMasukScreen';
 import ListBarangKeluarScreen from './src/screens/ListBarangKeluarScreen';
 import ListBarangReturScreen from './src/screens/ListBarangReturScreen';
@@ -62,7 +64,6 @@ export default function App() {
           name="MasukRiwayatGudang"
           component={MasukRiwayatGudang}
         />
-        <Stack.Screen name="CariRiwayatBarang" component={CariRiwayatBarang} />
         <Stack.Screen name="MasukService" component={MasukService} />
         <Stack.Screen
           name="ListBarangMasuk"
@@ -85,6 +86,18 @@ export default function App() {
           component={MasukSearchRiwayat}
         />
         <Stack.Screen name="KeluarService" component={KeluarService} />
+        <Stack.Screen
+          name="KeluarRiwayatGudang"
+          component={KeluarRiwayatGudang}
+        />
+        <Stack.Screen
+          name="KeluarRiwayatService"
+          component={KeluarRiwayatService}
+        />
+        <Stack.Screen
+          name="KeluarSearchRiwayat"
+          component={KeluarSearchRiwayat}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

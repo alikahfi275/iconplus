@@ -13,11 +13,9 @@ import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
 
-const CariRiwayatBarangScreen = (props: any) => {
-  const isMasuk = props?.route?.params?.isMasuk || false;
-  const isKeluar = props?.route?.params?.isKeluar || false;
-  const isReturn = props?.route?.params?.isReturn || false;
-  const isToko = props?.route?.params?.isToko || false;
+const KeluarSearchRiwayatScreen = (props: any) => {
+  const isGudang = props?.route?.params?.isGudang || false;
+
   const [modalVisible, setModalVisible] = useState(false);
   const [namaBarang, setNamaBarang] = useState('');
 
@@ -108,9 +106,7 @@ const CariRiwayatBarangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Cari Riwayat Barang{' '}
-            {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : isReturn ? 'Return' : ''}{' '}
-            {isToko ? 'Toko' : 'Service'}
+            {`Cari Riwayat Barang Masuk ${isGudang ? 'Gudang' : 'Service'}`}
           </Text>
         </View>
         <View style={{marginHorizontal: 20, marginTop: 20}}>
@@ -265,4 +261,4 @@ const CariRiwayatBarangScreen = (props: any) => {
   );
 };
 
-export default CariRiwayatBarangScreen;
+export default KeluarSearchRiwayatScreen;
