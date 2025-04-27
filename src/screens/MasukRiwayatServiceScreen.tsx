@@ -122,10 +122,8 @@ const MasukRiwayatServiceScreen = (props: any) => {
         />
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('CariRiwayatBarang', {
-              isMasuk,
-              isKeluar,
-              isReturn,
+            props.navigation.navigate('MasukSearchRiwayat', {
+              isService: true,
             })
           }
           style={{

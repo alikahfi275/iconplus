@@ -152,7 +152,7 @@ const MasukServiceScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('BarangMasukBaru')}
+          onPress={() => navigation.navigate('MasukServiceBaru')}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,

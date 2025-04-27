@@ -152,7 +152,7 @@ const MasukGudangScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('BarangMasukBaru')}
+          onPress={() => navigation.navigate('MasukGudangBaru')}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,

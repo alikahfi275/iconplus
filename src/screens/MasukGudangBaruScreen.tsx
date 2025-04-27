@@ -13,19 +13,17 @@ import {BASE_URL} from '../utils/api/api';
 import axios from 'axios';
 import ImageCropPicker from 'react-native-image-crop-picker';
 
-const BarangMasukBaruScreen = (props: any) => {
+const MasukGudangBaruScreen = (props: any) => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [namaBarang, setNamaBarang] = useState('');
   const [jumlahBarang, setJumlahBarang] = useState('');
   const [merekBarang, setMerekBarang] = useState('');
   const [satuanBarang, setSatuanBarang] = useState('');
   const [gambar, setGambar] = useState(null);
-  const isGudang = props?.route?.params?.isToko || false;
 
   const addItems = async () => {
-    const route = isGudang ? 'gudang' : 'service';
     try {
-      await axios.post(`${BASE_URL}barang/${route}/create.php`, {
+      await axios.post(`${BASE_URL}barang/gudang/create.php`, {
         kode_barang: kodeBarang,
         nama_barang: namaBarang,
         stok: jumlahBarang,
@@ -72,7 +70,7 @@ const BarangMasukBaruScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk {isGudang ? 'Gudang' : 'Service'} Baru
+            Barang Masuk Gudang Baru
           </Text>
         </View>
 
@@ -196,4 +194,4 @@ const BarangMasukBaruScreen = (props: any) => {
   );
 };
 
-export default BarangMasukBaruScreen;
+export default MasukGudangBaruScreen;
