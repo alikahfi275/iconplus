@@ -3,7 +3,6 @@ import {createStackNavigator} from '@react-navigation/stack';
 
 import Home from '../iconplus/src/screens/HomeScreen';
 import Login from './src/screens/LoginScreen';
-import BarangKeluar from '../iconplus/src/screens/BarangKeluarScreen';
 
 import MasukGudang from './src/screens/MasukGudangScreen';
 import MasukService from './src/screens/MasukServiceScreen';
@@ -11,6 +10,9 @@ import MasukRiwayatGudang from './src/screens/MasukRiwayatGudangScreen';
 import MasukRiwayatService from './src/screens/MasukRiwayatServiceScreen';
 import MasukGudangBaru from './src/screens/MasukGudangBaruScreen';
 import MasukSearchRiwayat from './src/screens/MasukSearchRiwayatScreen';
+
+import KeluarGudang from './src/screens/KeluarGudangScreen';
+import KeluarService from './src/screens/KeluarServiceScreen';
 
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
@@ -46,7 +48,7 @@ export default function App() {
         screenOptions={{headerShown: false}}>
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="BarangKeluar" component={BarangKeluar} />
+        <Stack.Screen name="KeluarGudang" component={KeluarGudang} />
         <Stack.Screen name="MasukGudang" component={MasukGudang} />
         <Stack.Screen name="StokBarangGudang" component={StokBarangGudang} />
         <Stack.Screen name="StokBarangServis" component={StokBarangServis} />
@@ -82,6 +84,7 @@ export default function App() {
           name="MasukSearchRiwayat"
           component={MasukSearchRiwayat}
         />
+        <Stack.Screen name="KeluarService" component={KeluarService} />
       </Stack.Navigator>
     </NavigationContainer>
   );

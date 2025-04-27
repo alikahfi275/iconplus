@@ -16,16 +16,16 @@ const ListBarangKeluarScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#FE0000',
             paddingVertical: 10,
           }}>
           BARANG KELUAR
         </Text>
         <View style={{flex: 1}}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ssss', {isGudang: true})}
+            onPress={() => navigation.navigate('KeluarGudang')}
             style={{
-              backgroundColor: '#BFFEC6',
+              backgroundColor: '#D3FED6',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 80,
@@ -43,9 +43,9 @@ const ListBarangKeluarScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ssss', {isService: true})}
+            onPress={() => navigation.navigate('KeluarService')}
             style={{
-              backgroundColor: '#BFFEC6',
+              backgroundColor: '#D3FED6',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -65,7 +65,7 @@ const ListBarangKeluarScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#FE0000',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -84,7 +84,7 @@ const ListBarangKeluarScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#FE0000',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
