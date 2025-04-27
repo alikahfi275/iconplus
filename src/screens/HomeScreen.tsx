@@ -79,7 +79,7 @@ const HomeScreen = () => {
             marginTop: 50,
           }}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ListMenu', {isMasuk: true})}>
+            onPress={() => navigation.navigate('ListBarangMasuk')}>
             <Image
               source={menuMasuk}
               style={{height: 140, width: 110}}
@@ -88,7 +88,7 @@ const HomeScreen = () => {
           </TouchableOpacity>
           <TouchableOpacity
             style={{marginHorizontal: 10}}
-            onPress={() => navigation.navigate('ListMenu', {isKeluar: true})}>
+            onPress={() => navigation.navigate('ListBarangKeluar')}>
             <Image
               source={menuKeluar}
               style={{height: 140, width: 110}}
@@ -96,7 +96,7 @@ const HomeScreen = () => {
             />
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ListMenu', {isReturn: true})}>
+            onPress={() => navigation.navigate('ListBarangRetur')}>
             <Image
               source={menuRetur}
               style={{height: 140, width: 110}}

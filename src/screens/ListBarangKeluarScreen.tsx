@@ -3,17 +3,9 @@ import React from 'react';
 import {BgHome} from '../utils/image';
 import {useNavigation} from '@react-navigation/native';
 
-const ListMenuScreen = (props: any) => {
+const ListBarangKeluarScreen = (props: any) => {
   const navigation: any = useNavigation();
-  const isMasuk = props?.route?.params?.isMasuk || false;
-  const isKeluar = props?.route?.params?.isKeluar || false;
-  const isReturn = props?.route?.params?.isReturn || false;
 
-  const nameRouter = isMasuk
-    ? 'BarangMasuk'
-    : isKeluar
-    ? 'BarangKeluar'
-    : 'BarangReturn';
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
@@ -27,11 +19,11 @@ const ListMenuScreen = (props: any) => {
             backgroundColor: '#018082',
             paddingVertical: 10,
           }}>
-          BARANG {isMasuk ? 'MASUK' : isKeluar ? 'KELUAR' : 'RETURN'}
+          BARANG KELUAR
         </Text>
         <View style={{flex: 1}}>
           <TouchableOpacity
-            onPress={() => navigation.navigate(nameRouter, {isToko: true})}
+            onPress={() => navigation.navigate('ssss', {isGudang: true})}
             style={{
               backgroundColor: '#BFFEC6',
               alignItems: 'center',
@@ -47,11 +39,11 @@ const ListMenuScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Barang {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : 'Return'} Toko
+              Barang Keluar Gudang
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate(nameRouter, {isService: true})}
+            onPress={() => navigation.navigate('ssss', {isService: true})}
             style={{
               backgroundColor: '#BFFEC6',
               alignItems: 'center',
@@ -67,19 +59,11 @@ const ListMenuScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Barang {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : 'Return'}{' '}
-              Service
+              Barang Keluar Service
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('RiwayatBarang', {
-                isToko: true,
-                isMasuk,
-                isKeluar,
-                isReturn,
-              })
-            }
+            onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',
@@ -94,20 +78,11 @@ const ListMenuScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              {` Riwayat \n Barang ${
-                isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : 'Return'
-              } \n Toko`}
+              Riwayat Barang Keluar Gudang
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() =>
-              navigation.navigate('RiwayatBarang', {
-                isService: true,
-                isMasuk,
-                isKeluar,
-                isReturn,
-              })
-            }
+            onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',
@@ -122,9 +97,7 @@ const ListMenuScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              {` Riwayat \n Barang ${
-                isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : 'Return'
-              } \n Service`}
+              Riwayat Barang Keluar Service
             </Text>
           </TouchableOpacity>
         </View>
@@ -133,4 +106,4 @@ const ListMenuScreen = (props: any) => {
   );
 };
 
-export default ListMenuScreen;
+export default ListBarangKeluarScreen;

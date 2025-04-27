@@ -4,7 +4,6 @@ import {
   StatusBar,
   ImageBackground,
   TextInput,
-  Button,
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -16,9 +15,8 @@ import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-const BarangMasukScreen = (props: any) => {
+const BarangMasukGudangScreen = (props: any) => {
   const navigation: any = useNavigation();
-  const isGudang = props?.route?.params?.isToko || false;
   const [modalVisible, setModalVisible] = useState(false);
   const [itemPick, setItemPick] = useState<any>({});
   const [jumlah, setJumlah] = useState('');
@@ -27,9 +25,8 @@ const BarangMasukScreen = (props: any) => {
   const [showSpinner, setShowSpinner] = useState(false);
 
   const updateJumlah = async () => {
-    let route = isGudang ? 'gudang' : 'service';
     try {
-      await axios.post(`${BASE_URL}barang_masuk/${route}.php`, {
+      await axios.post(`${BASE_URL}barang_masuk/gudang.php`, {
         kode_barang: itemPick.kode_barang,
         jumlah_masuk: jumlah,
       });
@@ -40,15 +37,10 @@ const BarangMasukScreen = (props: any) => {
   };
 
   const getListBarangGudang = async () => {
-    const route = isGudang ? 'gudang' : 'service';
     setShowSpinner(true);
     try {
-      const response = await axios.get(`${BASE_URL}barang/${route}/list.php`);
+      const response = await axios.get(`${BASE_URL}barang/gudang/list.php`);
       if (response.data.status === 'success') {
-        // const mappedData = response.data.data.map(
-        //   (item: any) => item.nama_barang,
-        // );
-
         setDataGudang(response.data.data);
         setShowSpinner(false);
       } else {
@@ -85,7 +77,7 @@ const BarangMasukScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk {isGudang ? 'Gudang' : 'Service'}
+            Barang Masuk Gudang
           </Text>
         </View>
 
@@ -160,7 +152,7 @@ const BarangMasukScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => navigation.navigate('BarangMasukBaru', {isGudang})}
+          onPress={() => navigation.navigate('BarangMasukBaru')}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
@@ -169,7 +161,7 @@ const BarangMasukScreen = (props: any) => {
             paddingVertical: 10,
           }}>
           <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
-            BARANG MASUK {isGudang ? 'TOKO' : 'SERVICE'} BARU
+            BARANG MASUK GUDANG BARU
           </Text>
         </TouchableOpacity>
       </ImageBackground>
@@ -177,4 +169,4 @@ const BarangMasukScreen = (props: any) => {
   );
 };
 
-export default BarangMasukScreen;
+export default BarangMasukGudangScreen;
