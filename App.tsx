@@ -4,7 +4,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 import Home from '../iconplus/src/screens/HomeScreen';
 import Login from './src/screens/LoginScreen';
 import BarangKeluar from '../iconplus/src/screens/BarangKeluarScreen';
-import BarangMasukGudang from './src/screens/BarangMasukGudangScreen';
+import MasukGudang from './src/screens/MasukGudangScreen';
 import BarangMasukService from './src/screens/BarangMasukServiceScreen';
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
@@ -14,7 +14,8 @@ import EditBarang from './src/screens/EditBarangScreen';
 import HapusBarang from './src/screens/HapusBarangScreen';
 import CariBarang from './src/screens/CariBarangScreen';
 import BarangMasukBaru from './src/screens/BarangMasukBaruScreen';
-import RiwayatBarang from '../iconplus/src/screens/RiwayatBarangScreen';
+import RiwayatGudangScreen from '../iconplus/src/screens/RiwayatGudangScreen';
+import RiwayatServiceScreen from '../iconplus/src/screens/RiwayatServiceScreen';
 import CariRiwayatBarang from '../iconplus/src/screens/CariRiwayatBarangScreen';
 import ListBarangMasukScreen from './src/screens/ListBarangMasukScreen';
 import ListBarangKeluarScreen from './src/screens/ListBarangKeluarScreen';
@@ -43,7 +44,7 @@ export default function App() {
         <Stack.Screen name="Login" component={Login} />
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="BarangKeluar" component={BarangKeluar} />
-        <Stack.Screen name="BarangMasukGudang" component={BarangMasukGudang} />
+        <Stack.Screen name="MasukGudang" component={MasukGudang} />
         <Stack.Screen name="StokBarangGudang" component={StokBarangGudang} />
         <Stack.Screen name="StokBarangServis" component={StokBarangServis} />
         <Stack.Screen name="BarangReturn" component={BarangReturn} />
@@ -52,7 +53,7 @@ export default function App() {
         <Stack.Screen name="HapusBarang" component={HapusBarang} />
         <Stack.Screen name="CariBarang" component={CariBarang} />
         <Stack.Screen name="BarangMasukBaru" component={BarangMasukBaru} />
-        <Stack.Screen name="RiwayatBarang" component={RiwayatBarang} />
+        <Stack.Screen name="RiwayatGudang" component={RiwayatGudangScreen} />
         <Stack.Screen name="CariRiwayatBarang" component={CariRiwayatBarang} />
         <Stack.Screen
           name="BarangMasukService"
@@ -70,6 +71,7 @@ export default function App() {
           name="ListBarangRetur"
           component={ListBarangReturScreen}
         />
+        <Stack.Screen name="RiwayatService" component={RiwayatServiceScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

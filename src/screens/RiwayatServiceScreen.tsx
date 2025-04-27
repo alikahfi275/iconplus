@@ -10,11 +10,10 @@ import React from 'react';
 import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
 
-const RiwayatBarangScreen = (props: any) => {
+const RiwayatServiceScreen = (props: any) => {
   const isMasuk = props?.route?.params?.isMasuk || false;
   const isKeluar = props?.route?.params?.isKeluar || false;
   const isReturn = props?.route?.params?.isReturn || false;
-  const isToko = props?.route?.params?.isToko || false;
 
   const riwayatDummy = [
     {
@@ -64,8 +63,8 @@ const RiwayatBarangScreen = (props: any) => {
               marginVertical: 5,
             }}>
             Riwayat Barang{' '}
-            {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : isReturn ? 'Return' : ''}{' '}
-            {isToko ? 'Toko' : 'Service'}
+            {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : isReturn ? 'Return' : ''}
+            Service
           </Text>
         </View>
 
@@ -127,7 +126,6 @@ const RiwayatBarangScreen = (props: any) => {
               isMasuk,
               isKeluar,
               isReturn,
-              isToko,
             })
           }
           style={{
@@ -145,4 +143,4 @@ const RiwayatBarangScreen = (props: any) => {
   );
 };
 
-export default RiwayatBarangScreen;
+export default RiwayatServiceScreen;
