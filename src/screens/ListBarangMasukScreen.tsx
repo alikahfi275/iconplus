@@ -43,7 +43,7 @@ const ListBarangMasukScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('BarangMasukService')}
+            onPress={() => navigation.navigate('MasukService')}
             style={{
               backgroundColor: '#BFFEC6',
               alignItems: 'center',
@@ -63,7 +63,7 @@ const ListBarangMasukScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('RiwayatGudang')}
+            onPress={() => navigation.navigate('MasukRiwayatGudang')}
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',
@@ -82,7 +82,7 @@ const ListBarangMasukScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('RiwayatService')}
+            onPress={() => navigation.navigate('MasukRiwayatService')}
             style={{
               backgroundColor: '#018082',
               alignItems: 'center',

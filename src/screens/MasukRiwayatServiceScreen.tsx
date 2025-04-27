@@ -10,7 +10,7 @@ import React from 'react';
 import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
 
-const RiwayatGudangScreen = (props: any) => {
+const MasukRiwayatServiceScreen = (props: any) => {
   const isMasuk = props?.route?.params?.isMasuk || false;
   const isKeluar = props?.route?.params?.isKeluar || false;
   const isReturn = props?.route?.params?.isReturn || false;
@@ -64,7 +64,7 @@ const RiwayatGudangScreen = (props: any) => {
             }}>
             Riwayat Barang{' '}
             {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : isReturn ? 'Return' : ''}
-            Gudang
+            Service
           </Text>
         </View>
 
@@ -143,4 +143,4 @@ const RiwayatGudangScreen = (props: any) => {
   );
 };
 
-export default RiwayatGudangScreen;
+export default MasukRiwayatServiceScreen;

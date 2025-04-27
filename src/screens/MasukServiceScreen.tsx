@@ -15,7 +15,7 @@ import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';
 import Spinner from 'react-native-loading-spinner-overlay';
 
-const BarangMasukServiceScreen = (props: any) => {
+const MasukServiceScreen = (props: any) => {
   const navigation: any = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [itemPick, setItemPick] = useState<any>({});
@@ -169,4 +169,4 @@ const BarangMasukServiceScreen = (props: any) => {
   );
 };
 
-export default BarangMasukServiceScreen;
+export default MasukServiceScreen;
