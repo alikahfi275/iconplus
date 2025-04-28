@@ -8,60 +8,65 @@ import {
   FlatList,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
+import moment from 'moment';
 
 const MasukSearchRiwayatScreen = (props: any) => {
   const isGudang = props?.route?.params?.isGudang || false;
 
+  const routeName = isGudang ? 'gudang' : 'service';
+
   const [modalVisible, setModalVisible] = useState(false);
-  const [namaBarang, setNamaBarang] = useState('');
+  const [namaBarang, setNamaBarang] = useState<any>('');
 
   const [tanggalDari, setTanggalDari] = useState('');
   const [tanggalSampai, setTanggalSampai] = useState('');
+  const [dataResult, setDataResult] = useState<any>([]);
+  const [dataRiwayat, setDataRiwayat] = useState<any>([]);
 
-  const namaBarangDummy = [
-    'Pensil',
-    'Penghapus',
-    'Penggaris',
-    'Penggaris',
-    'Penggaris',
-  ];
+  const searchByFilter = async () => {
+    try {
+      const response = await axios.post(`${BASE_URL}riwayat/masuk_filter.php`, {
+        dari_tanggal: `${tanggalDari} 00:00:00`,
+        ke_tanggal: `${tanggalSampai} 23:59:59`,
+        nama_barang: namaBarang?.nama_barang,
+        tipe: routeName,
+      });
 
-  const dummyData = [
-    {
-      id: '1',
-      tanggal: '20-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 10,
-      jenis: 'Masuk',
-      lokasi: 'Toko',
-    },
-    {
-      id: '2',
-      tanggal: '21-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 5,
-      jenis: 'Keluar',
-      lokasi: 'Service',
-    },
-    {
-      id: '3',
-      tanggal: '22-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 2,
-      jenis: 'Return',
-      lokasi: 'Toko',
-    },
-  ];
+      console.log(response.data);
+
+      if (response.data.status === 'success') {
+        setDataResult(response.data.data);
+      }
+      setTanggalDari('');
+      setTanggalSampai('');
+      setNamaBarang('');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  const getListRiwayat = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}riwayat/masuk_${routeName}_list.php`,
+      );
+      if (response.data.status === 'success') {
+        setDataRiwayat(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getListRiwayat();
+  }, []);
 
   const renderItem = ({item}: any) => (
     <View
@@ -70,18 +75,17 @@ const MasukSearchRiwayatScreen = (props: any) => {
         paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        justifyContent: 'space-between',
+        flex: 1,
       }}>
-      <Text
-        style={{flex: 1, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.kodeBarang}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {item.kode_barang}
       </Text>
-      <Text
-        style={{flex: 2, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.namaBarang}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {item.nama_barang}
       </Text>
-      <Text
-        style={{flex: 1, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.tanggalMasuk}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {moment(item.tanggal_masuk).format('YYYY-MM-DD')}
       </Text>
     </View>
   );
@@ -94,7 +98,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
           title="Nama Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={namaBarangDummy}
+          items={dataRiwayat}
           handleSelect={(item: any) => setNamaBarang(item)}
         />
         <View style={{backgroundColor: '#018082'}}>
@@ -123,7 +127,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
             value={tanggalDari}
             keyboardType="numeric"
             onChangeText={text => setTanggalDari(text)}
-            placeholder="Masukan Tanggal contoh : (20-12-2022)"
+            placeholder="Masukan Tanggal contoh : (2022-12-20)"
           />
         </View>
         <View style={{marginHorizontal: 20, marginTop: 20}}>
@@ -137,10 +141,10 @@ const MasukSearchRiwayatScreen = (props: any) => {
               paddingVertical: 5,
               marginBottom: 10,
             }}
-            value={tanggalDari}
+            value={tanggalSampai}
             keyboardType="numeric"
-            onChangeText={text => setTanggalDari(text)}
-            placeholder="Masukan Tanggal contoh : (20-12-2022)"
+            onChangeText={text => setTanggalSampai(text)}
+            placeholder="Masukan Tanggal contoh : (2022-12-20)"
           />
         </View>
         <View style={{marginHorizontal: 20}}>
@@ -165,10 +169,12 @@ const MasukSearchRiwayatScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: namaBarang ? '600' : '300',
-                color: namaBarang ? 'black' : '#4c4c4c',
+                fontWeight: namaBarang?.nama_barang ? '600' : '300',
+                color: namaBarang?.nama_barang ? 'black' : '#4c4c4c',
               }}>
-              {namaBarang ? namaBarang : 'Nama Barang'}
+              {namaBarang?.nama_barang
+                ? namaBarang?.nama_barang
+                : 'Nama Barang'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -179,7 +185,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={searchByFilter}
           style={{
             marginHorizontal: 20,
             backgroundColor: '#018082',
@@ -216,33 +222,31 @@ const MasukSearchRiwayatScreen = (props: any) => {
                 backgroundColor: '#f0f0f0',
                 borderBottomWidth: 2,
                 borderBottomColor: '#018082',
+                justifyContent: 'space-between',
               }}>
               <Text
                 style={{
-                  flex: 1,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
                 Kode Barang
               </Text>
               <Text
                 style={{
-                  flex: 2,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
                 Nama Barang
               </Text>
               <Text
                 style={{
-                  flex: 1,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
                 Tanggal Masuk
@@ -250,7 +254,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
             </View>
             {/* Table Data */}
             <FlatList
-              data={dummyData}
+              data={dataResult}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
