@@ -17,9 +17,11 @@ import KeluarRiwayatGudang from './src/screens/KeluarRiwayatGudangScreen';
 import KeluarRiwayatService from './src/screens/KeluarRiwayatServiceScreen';
 import KeluarSearchRiwayat from './src/screens/KeluarSearchRiwayatScreen';
 
+import ReturGudang from './src/screens/ReturGudangScreen';
+import ReturService from './src/screens/ReturServiceScreen';
+
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
-import BarangReturn from '../iconplus/src/screens/BarangReturnScreen';
 import DetailBarang from './src/screens/DetailBarangScreen';
 import EditBarang from './src/screens/EditBarangScreen';
 import HapusBarang from './src/screens/HapusBarangScreen';
@@ -54,7 +56,7 @@ export default function App() {
         <Stack.Screen name="MasukGudang" component={MasukGudang} />
         <Stack.Screen name="StokBarangGudang" component={StokBarangGudang} />
         <Stack.Screen name="StokBarangServis" component={StokBarangServis} />
-        <Stack.Screen name="BarangReturn" component={BarangReturn} />
+        <Stack.Screen name="ReturGudang" component={ReturGudang} />
         <Stack.Screen name="DetailBarang" component={DetailBarang} />
         <Stack.Screen name="EditBarang" component={EditBarang} />
         <Stack.Screen name="HapusBarang" component={HapusBarang} />
@@ -98,6 +100,7 @@ export default function App() {
           name="KeluarSearchRiwayat"
           component={KeluarSearchRiwayat}
         />
+        <Stack.Screen name="ReturService" component={ReturService} />
       </Stack.Navigator>
     </NavigationContainer>
   );

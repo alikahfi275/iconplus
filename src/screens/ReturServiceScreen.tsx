@@ -11,7 +11,7 @@ import {NoImage} from '../utils/image';
 import {LocalStorage} from '../utils/database/storage';
 import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
-const BarangReturnScreen = () => {
+const ReturServiceScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [barang, setBarang] = useState(null as any);
   const [jumlah, setJumlah] = useState('');
@@ -258,4 +258,4 @@ const BarangReturnScreen = () => {
   );
 };
 
-export default BarangReturnScreen;
+export default ReturServiceScreen;

@@ -16,16 +16,16 @@ const ListBarangReturScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#FFFFA3',
             paddingVertical: 10,
           }}>
           BARANG RETUR
         </Text>
         <View style={{flex: 1}}>
           <TouchableOpacity
-            onPress={() => navigation.navigate('', {isGudang: true})}
+            onPress={() => navigation.navigate('ReturGudang')}
             style={{
-              backgroundColor: '#BFFEC6',
+              backgroundColor: '#FFFFA3',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 80,
@@ -43,9 +43,9 @@ const ListBarangReturScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('ssss', {isService: true})}
+            onPress={() => navigation.navigate('ReturService')}
             style={{
-              backgroundColor: '#BFFEC6',
+              backgroundColor: '#FFFFA3',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -59,7 +59,7 @@ const ListBarangReturScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Barang Retur Service
+              {'Barang Retur \n Service'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -78,7 +78,7 @@ const ListBarangReturScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Riwayat Barang Retur Gudang
+              {'Riwayat Barang \n Retur Gudang'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -97,7 +97,7 @@ const ListBarangReturScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Riwayat Barang Retur Service
+              {'Riwayat Barang \n Retur Service'}
             </Text>
           </TouchableOpacity>
         </View>
