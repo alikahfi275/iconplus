@@ -10,6 +10,7 @@ import MasukRiwayatGudang from './src/screens/MasukRiwayatGudangScreen';
 import MasukRiwayatService from './src/screens/MasukRiwayatServiceScreen';
 import MasukGudangBaru from './src/screens/MasukGudangBaruScreen';
 import MasukSearchRiwayat from './src/screens/MasukSearchRiwayatScreen';
+import MasukServiceBaru from './src/screens/MasukServiceBaruScreen';
 
 import KeluarGudang from './src/screens/KeluarGudangScreen';
 import KeluarService from './src/screens/KeluarServiceScreen';
@@ -62,6 +63,7 @@ export default function App() {
         <Stack.Screen name="HapusBarang" component={HapusBarang} />
         <Stack.Screen name="CariBarang" component={CariBarang} />
         <Stack.Screen name="MasukGudangBaru" component={MasukGudangBaru} />
+        <Stack.Screen name="MasukServiceBaru" component={MasukServiceBaru} />
         <Stack.Screen
           name="MasukRiwayatGudang"
           component={MasukRiwayatGudang}
