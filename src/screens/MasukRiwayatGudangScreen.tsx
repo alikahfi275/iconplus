@@ -6,49 +6,31 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
+import moment from 'moment';
 
 const MasukRiwayatGudangScreen = (props: any) => {
-  const isMasuk = props?.route?.params?.isMasuk || false;
-  const isKeluar = props?.route?.params?.isKeluar || false;
-  const isReturn = props?.route?.params?.isReturn || false;
+  const [dataRiwayatGudang, setDataRiwayatGudang] = useState<any>([]);
+  const getListRiwayatGudang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}riwayat/masuk_gudang_list.php`,
+      );
+      if (response.data.status === 'success') {
+        setDataRiwayatGudang(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
 
-  const riwayatDummy = [
-    {
-      id: 1,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 2,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 3,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 4,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-  ];
+  useEffect(() => {
+    getListRiwayatGudang();
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
@@ -62,14 +44,12 @@ const MasukRiwayatGudangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Riwayat Barang{' '}
-            {isMasuk ? 'Masuk' : isKeluar ? 'Keluar' : isReturn ? 'Return' : ''}
-            Gudang
+            Riwayat Barang Masuk Gudang
           </Text>
         </View>
 
         <FlatList
-          data={riwayatDummy}
+          data={dataRiwayatGudang}
           renderItem={({item}) => (
             <View
               style={{
@@ -88,7 +68,7 @@ const MasukRiwayatGudangScreen = (props: any) => {
                   padding: 5,
                   backgroundColor: '#0094ff',
                 }}>
-                Tanggal Masuk : {item?.tanggalMasuk}
+                Tanggal Masuk : {moment(item?.tanggal).format('L')}
               </Text>
               <Text
                 style={{
@@ -97,7 +77,7 @@ const MasukRiwayatGudangScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Kode Barang Masuk: {item?.kodeBarangMasuk}
+                Kode Barang : {item?.kode_barang}
               </Text>
               <Text
                 style={{
@@ -106,7 +86,7 @@ const MasukRiwayatGudangScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Nama Barang : {item?.namaBarangMasuk}
+                Nama Barang : {item?.nama_barang}
               </Text>
               <Text
                 style={{
@@ -115,7 +95,7 @@ const MasukRiwayatGudangScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Jumlah Masuk : {item?.jumlahMasuk}
+                Jumlah Masuk : {item?.jumlah}
               </Text>
             </View>
           )}
