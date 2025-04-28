@@ -15,6 +15,7 @@ import ModalList from '../components/ModalList';
 import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';
 import moment from 'moment';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 
 const MasukSearchRiwayatScreen = (props: any) => {
   const isGudang = props?.route?.params?.isGudang || false;
@@ -28,6 +29,38 @@ const MasukSearchRiwayatScreen = (props: any) => {
   const [tanggalSampai, setTanggalSampai] = useState('');
   const [dataResult, setDataResult] = useState<any>([]);
   const [dataRiwayat, setDataRiwayat] = useState<any>([]);
+
+  const generatePDF = async () => {
+    // Membuat HTML dari array
+    let htmlContent =
+      '<h1>Inventory Report</h1><table border="1" cellpadding="5" cellspacing="0">';
+    htmlContent +=
+      '<tr><th>Kode Barang</th><th>Nama Barang</th><th>Jumlah</th><th>Tipe</th><th>Tanggal</th></tr>';
+
+    dataResult.forEach((item: any) => {
+      htmlContent += `
+      <tr>
+        <td>${item.kode_barang}</td>
+        <td>${item.nama_barang}</td>
+        <td>${item.jumlah}</td>
+        <td>${item.tipe}</td>
+        <td>${item.tanggal}</td>
+      </tr>
+    `;
+    });
+
+    htmlContent += '</table>';
+
+    // Mengonversi HTML menjadi PDF
+    const options = {
+      html: htmlContent,
+      fileName: 'inventory_report',
+      directory: 'Documents',
+    };
+
+    const file = await RNHTMLtoPDF.convert(options);
+    console.log(file.filePath); // Menampilkan lokasi file PDF yang dihasilkan
+  };
 
   const searchByFilter = async () => {
     try {
@@ -198,7 +231,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={generatePDF}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
