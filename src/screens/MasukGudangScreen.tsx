@@ -30,6 +30,12 @@ const MasukGudangScreen = (props: any) => {
         kode_barang: itemPick.kode_barang,
         jumlah_masuk: jumlah,
       });
+      await axios.post(`${BASE_URL}riwayat/masuk_gudang.php`, {
+        kode_barang: itemPick.kode_barang,
+        jumlah: jumlah,
+        tipe: 'gudang',
+        nama_barang: itemPick.nama_barang,
+      });
       setJumlah('');
     } catch (error) {
       console.log('Error fetching data:', error);
