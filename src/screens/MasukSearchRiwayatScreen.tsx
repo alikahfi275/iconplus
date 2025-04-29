@@ -90,7 +90,18 @@ const MasukSearchRiwayatScreen = (props: any) => {
         `${BASE_URL}riwayat/masuk_${routeName}_list.php`,
       );
       if (response.data.status === 'success') {
-        setDataRiwayat(response.data.data);
+        const data = response.data.data;
+
+        const seen = new Set();
+        const filteredData = data.filter((item: any) => {
+          if (seen.has(item.nama_barang)) {
+            return false;
+          }
+          seen.add(item.nama_barang);
+          return true;
+        });
+
+        setDataRiwayat(filteredData);
       }
     } catch (error) {
       console.log('Error fetching data:', error);
