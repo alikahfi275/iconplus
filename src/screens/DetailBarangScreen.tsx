@@ -27,8 +27,8 @@ const DetailBarangScreen = (props: any) => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <View
           style={{
             backgroundColor: '#FEFDC5',
@@ -101,7 +101,7 @@ const DetailBarangScreen = (props: any) => {
           }}>
           MEREK : {detailItems?.merek}
         </Text>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

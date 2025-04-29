@@ -8,7 +8,7 @@ const ListBarangKeluarScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <Text
           style={{
             fontSize: 22,
@@ -101,7 +101,7 @@ const ListBarangKeluarScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

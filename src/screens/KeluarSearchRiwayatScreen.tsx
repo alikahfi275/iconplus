@@ -88,8 +88,8 @@ const KeluarSearchRiwayatScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
@@ -97,7 +97,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
           items={namaBarangDummy}
           handleSelect={(item: any) => setNamaBarang(item)}
         />
-        <View style={{backgroundColor: '#018082'}}>
+        <View style={{backgroundColor: '#1e81b0'}}>
           <Text
             style={{
               textAlign: 'center',
@@ -182,7 +182,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
           onPress={() => {}}
           style={{
             marginHorizontal: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             marginTop: 30,
             paddingVertical: 10,
@@ -196,7 +196,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             marginTop: 20,
             paddingVertical: 10,
@@ -215,7 +215,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
                 paddingVertical: 10,
                 backgroundColor: '#f0f0f0',
                 borderBottomWidth: 2,
-                borderBottomColor: '#018082',
+                borderBottomColor: '#1e81b0',
               }}>
               <Text
                 style={{
@@ -256,7 +256,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
             />
           </View>
         </ScrollView>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

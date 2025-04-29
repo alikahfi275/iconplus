@@ -33,9 +33,9 @@ const MasukRiwayatServiceScreen = (props: any) => {
   }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
-        <View style={{backgroundColor: '#018082'}}>
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <View style={{backgroundColor: '#1e81b0'}}>
           <Text
             style={{
               textAlign: 'center',
@@ -66,7 +66,7 @@ const MasukRiwayatServiceScreen = (props: any) => {
                   color: 'black',
                   alignItems: 'center',
                   padding: 5,
-                  backgroundColor: '#0094ff',
+                  backgroundColor: '#1e81b0',
                 }}>
                 Tanggal Masuk : {moment(item?.tanggal).format('L')}
               </Text>
@@ -116,7 +116,7 @@ const MasukRiwayatServiceScreen = (props: any) => {
           }}>
           <Icons name="search" type="MaterialIcons" size={40} color="black" />
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

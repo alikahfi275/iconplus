@@ -51,8 +51,8 @@ const KeluarRiwayatServiceScreen = (props: any) => {
   ];
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <View style={{backgroundColor: '#FE0000'}}>
           <Text
             style={{
@@ -84,7 +84,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
                   color: 'black',
                   alignItems: 'center',
                   padding: 5,
-                  backgroundColor: '#0094ff',
+                  backgroundColor: '#1e81b0',
                 }}>
                 Tanggal Masuk : {item?.tanggalMasuk}
               </Text>
@@ -134,7 +134,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
           }}>
           <Icons name="search" type="MaterialIcons" size={40} color="black" />
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

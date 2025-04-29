@@ -65,9 +65,9 @@ const MasukGudangBaruScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
-        <View style={{backgroundColor: '#018082'}}>
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <View style={{backgroundColor: '#1e81b0'}}>
           <Text
             style={{
               textAlign: 'center',
@@ -173,7 +173,7 @@ const MasukGudangBaruScreen = (props: any) => {
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             marginTop: 20,
             paddingVertical: 10,
@@ -187,7 +187,7 @@ const MasukGudangBaruScreen = (props: any) => {
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             paddingVertical: 10,
           }}>
@@ -195,7 +195,7 @@ const MasukGudangBaruScreen = (props: any) => {
             SIMPAN
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

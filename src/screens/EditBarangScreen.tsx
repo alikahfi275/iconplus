@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   ScrollView,
   ImageBackground,
+  StatusBar,
 } from 'react-native';
 import {BgHome, NoImage} from '../utils/image';
 import Icons from '../components/Icons';
@@ -99,7 +100,8 @@ const EditBarangScreen = (props: any) => {
   return (
     <ScrollView
       contentContainerStyle={{backgroundColor: '#E6F1F7', flexGrow: 1}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
         <ModalList
           title="Kode Barang"
           modalVisible={modalVisible}
@@ -114,7 +116,7 @@ const EditBarangScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
           Edit Barang {isService ? 'Service' : 'Gudang'}
@@ -268,7 +270,7 @@ const EditBarangScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </ScrollView>
   );
 };

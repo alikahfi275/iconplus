@@ -8,7 +8,7 @@ const ListBarangReturScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <Text
           style={{
             fontSize: 22,
@@ -65,7 +65,7 @@ const ListBarangReturScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#1e81b0',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -84,7 +84,7 @@ const ListBarangReturScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('RiwayatBarang')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#1e81b0',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -101,7 +101,7 @@ const ListBarangReturScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

@@ -45,8 +45,8 @@ const StokBarangServisScreen = () => {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <View style={{backgroundColor: '#BFFEC6'}}>
           <Text
             style={{
@@ -94,7 +94,7 @@ const StokBarangServisScreen = () => {
                     fontWeight: '800',
                     borderWidth: 2,
                     padding: 15,
-                    color: '#018082',
+                    color: '#1e81b0',
                   }}>
                   {item.stok}
                 </Text>
@@ -144,7 +144,7 @@ const StokBarangServisScreen = () => {
             <Icons name="pencil" size={40} color="black" />
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

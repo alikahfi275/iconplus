@@ -1,4 +1,10 @@
-import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
+import {
+  View,
+  Text,
+  ImageBackground,
+  TouchableOpacity,
+  StatusBar,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BgHome} from '../utils/image';
 import ModalList from '../components/ModalList';
@@ -45,7 +51,8 @@ const HapusBarangTokoScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
         <ModalList
           title="Kode Barang"
           modalVisible={modalVisible}
@@ -60,10 +67,10 @@ const HapusBarangTokoScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
-          Hapus Barang {isService ? 'Service' : 'Toko'}
+          Hapus Barang {isService ? 'Service' : 'Gudang'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>
@@ -139,7 +146,7 @@ const HapusBarangTokoScreen = (props: any) => {
             HAPUS
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

@@ -65,8 +65,8 @@ const MasukServiceScreen = (props: any) => {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
@@ -74,7 +74,7 @@ const MasukServiceScreen = (props: any) => {
           items={dataService}
           handleSelect={(item: any) => setItemPick(item)}
         />
-        <View style={{backgroundColor: '#018082'}}>
+        <View style={{backgroundColor: '#1e81b0'}}>
           <Text
             style={{
               textAlign: 'center',
@@ -148,7 +148,7 @@ const MasukServiceScreen = (props: any) => {
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             paddingVertical: 10,
             marginTop: 20,
@@ -162,7 +162,7 @@ const MasukServiceScreen = (props: any) => {
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             alignItems: 'center',
             paddingVertical: 10,
           }}>
@@ -170,7 +170,7 @@ const MasukServiceScreen = (props: any) => {
             BARANG MASUK SERVICE BARU
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

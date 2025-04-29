@@ -8,7 +8,7 @@ const ListBarangMasukScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <Text
           style={{
             fontSize: 22,
@@ -16,7 +16,7 @@ const ListBarangMasukScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
           BARANG MASUK
@@ -65,7 +65,7 @@ const ListBarangMasukScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('MasukRiwayatGudang')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#1e81b0',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -84,7 +84,7 @@ const ListBarangMasukScreen = (props: any) => {
           <TouchableOpacity
             onPress={() => navigation.navigate('MasukRiwayatService')}
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#1e81b0',
               alignItems: 'center',
               marginHorizontal: 60,
               marginTop: 25,
@@ -101,7 +101,7 @@ const ListBarangMasukScreen = (props: any) => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

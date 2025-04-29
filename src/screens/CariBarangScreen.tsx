@@ -4,6 +4,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   Image,
+  StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import {BgHome, NoImage} from '../utils/image';
@@ -53,7 +54,8 @@ const CariBarangTokoScreen = (props: any) => {
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
@@ -68,7 +70,7 @@ const CariBarangTokoScreen = (props: any) => {
             color: 'black',
             textAlign: 'center',
             marginBottom: 20,
-            backgroundColor: '#018082',
+            backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
           Cari Barang {isService ? 'Service' : 'Gudang'}
@@ -250,7 +252,7 @@ const CariBarangTokoScreen = (props: any) => {
             {satuanBarang ? satuanBarang : 'Satuan Barang'}
           </Text>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

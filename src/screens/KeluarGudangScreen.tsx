@@ -63,8 +63,8 @@ const KeluarGudangScreen = (props: any) => {
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
@@ -176,7 +176,7 @@ const KeluarGudangScreen = (props: any) => {
             SIMPAN
           </Text>
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };
