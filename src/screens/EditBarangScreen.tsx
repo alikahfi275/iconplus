@@ -45,7 +45,7 @@ const EditBarangScreen = (props: any) => {
       .catch(error => {});
   };
 
-  const getListBarangGudang = async () => {
+  const getListBarang = async () => {
     try {
       const response = await axios.get(
         `${BASE_URL}barang/${routeName}/list.php`,
@@ -68,6 +68,7 @@ const EditBarangScreen = (props: any) => {
         merek: merekBarang,
         gambar: gambar,
       });
+      setPickItem(null);
       setKodeBarang('');
       setNamaBarang('');
       setStokBarang('');
@@ -80,7 +81,7 @@ const EditBarangScreen = (props: any) => {
   };
 
   useEffect(() => {
-    getListBarangGudang();
+    getListBarang();
   }, []);
 
   const handleSelect = (item: any) => {

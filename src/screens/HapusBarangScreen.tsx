@@ -1,31 +1,57 @@
 import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BgHome} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
+import {BASE_URL} from '../utils/api/api';
+import axios from 'axios';
 
 const HapusBarangTokoScreen = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [kodeBarang, setKodeBarang] = useState('');
-  const [namaBarang, setNamaBarang] = useState('');
+  const [dataGudang, setDataGudang] = useState([]);
+  const [pickItem, setPickItem] = useState<any>(null);
 
   const isService = props?.route?.params?.isService || false;
+  const routeName = isService ? 'service' : 'gudang';
 
-  const kodeBarangDummy = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-  ];
-
-  const handleSelect = (item: any) => {
-    setKodeBarang(item);
+  const deleteBarang = async () => {
+    try {
+      await axios.post(`${BASE_URL}barang/${routeName}/delete.php`, {
+        kode_barang: pickItem?.kode_barang,
+      });
+      getListBarang();
+      setPickItem(null);
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
   };
+
+  const getListBarang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}barang/${routeName}/list.php`,
+      );
+      if (response.data.status === 'success') {
+        setDataGudang(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getListBarang();
+  }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
         <ModalList
+          title="Kode Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={kodeBarangDummy}
-          handleSelect={(item: any) => handleSelect(item)}
+          items={dataGudang}
+          handleSelect={(item: any) => setPickItem(item)}
         />
         <Text
           style={{
@@ -62,10 +88,10 @@ const HapusBarangTokoScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: kodeBarang ? '600' : '300',
-                color: kodeBarang ? 'black' : '#4c4c4c',
+                fontWeight: pickItem?.kode_barang ? '600' : '300',
+                color: pickItem?.kode_barang ? 'black' : '#4c4c4c',
               }}>
-              {kodeBarang ? kodeBarang : '0'}
+              {pickItem?.kode_barang ? pickItem?.kode_barang : '0'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -87,15 +113,16 @@ const HapusBarangTokoScreen = (props: any) => {
           <Text
             style={{
               fontSize: 25,
-              fontWeight: '600',
-              color: 'black',
+              fontWeight: pickItem?.nama_barang ? '600' : '300',
+              color: pickItem?.nama_barang ? 'black' : '#4c4c4c',
               marginTop: 5,
               textAlign: 'center',
             }}>
-            {namaBarang}
+            {pickItem?.nama_barang ? pickItem?.nama_barang : 'Nama Barang'}
           </Text>
         </View>
         <TouchableOpacity
+          onPress={deleteBarang}
           style={{
             backgroundColor: '#2E7D32',
             padding: 12,

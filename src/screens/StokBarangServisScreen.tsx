@@ -10,7 +10,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import Icons from '../components/Icons';
 import {BgHome, NoImage} from '../utils/image';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {BASE_URL} from '../utils/api/api';
 import Spinner from 'react-native-loading-spinner-overlay';
 import axios from 'axios';
@@ -36,9 +36,11 @@ const StokBarangServisScreen = () => {
     }
   };
 
-  useEffect(() => {
-    getListBarangService();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getListBarangService();
+    }, []),
+  );
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

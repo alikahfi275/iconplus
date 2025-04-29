@@ -10,7 +10,7 @@ import {
 import React, {useEffect, useState} from 'react';
 import Icons from '../components/Icons';
 import {BgHome, NoImage} from '../utils/image';
-import {useNavigation} from '@react-navigation/native';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import {BASE_URL} from '../utils/api/api';
 import axios from 'axios';
 import Spinner from 'react-native-loading-spinner-overlay';
@@ -36,9 +36,11 @@ const StokBarangScreen = () => {
     }
   };
 
-  useEffect(() => {
-    getListBarangGudang();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getListBarangGudang();
+    }, []),
+  );
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

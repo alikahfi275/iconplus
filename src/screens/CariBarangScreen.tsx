@@ -5,25 +5,52 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {BgHome, NoImage} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
 
 const CariBarangTokoScreen = (props: any) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [namaBarang, setNamaBarang] = useState('');
   const [gambar, setGambar] = useState(null);
+  const [dataGudang, setDataGudang] = useState([]);
+  const [pickItem, setPickItem] = useState<any>(null);
+  const [kodeBarang, setKodeBarang] = useState('');
+  const [stokBarang, setStokBarang] = useState('');
+  const [merekBarang, setMerekBarang] = useState('');
+  const [satuanBarang, setSatuanBarang] = useState('');
+
+  const cariBarang = () => {
+    if (pickItem) {
+      setKodeBarang(pickItem.kode_barang);
+      setStokBarang(pickItem.stok);
+      setMerekBarang(pickItem.merek);
+      setSatuanBarang(pickItem.satuan);
+      setGambar(pickItem.gambar);
+    }
+  };
 
   const isService = props?.route?.params?.isService || false;
-
-  const kodeBarangDummy = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-  ];
-
-  const handleSelect = (item: any) => {
-    setNamaBarang(item);
+  const routeName = isService ? 'service' : 'gudang';
+  const getListBarang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}barang/${routeName}/list.php`,
+      );
+      if (response.data.status === 'success') {
+        setDataGudang(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
   };
+
+  useEffect(() => {
+    getListBarang();
+  }, []);
+
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <ImageBackground source={BgHome} style={{flex: 1}}>
@@ -31,8 +58,8 @@ const CariBarangTokoScreen = (props: any) => {
           title="Nama Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={kodeBarangDummy}
-          handleSelect={(item: any) => handleSelect(item)}
+          items={dataGudang}
+          handleSelect={(item: any) => setPickItem(item)}
         />
         <Text
           style={{
@@ -44,7 +71,7 @@ const CariBarangTokoScreen = (props: any) => {
             backgroundColor: '#018082',
             paddingVertical: 10,
           }}>
-          Cari Barang {isService ? 'Service' : 'Toko'}
+          Cari Barang {isService ? 'Service' : 'Gudang'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>
@@ -69,10 +96,10 @@ const CariBarangTokoScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: namaBarang ? '600' : '300',
-                color: namaBarang ? 'black' : '#4c4c4c',
+                fontWeight: pickItem?.nama_barang ? '600' : '300',
+                color: pickItem?.nama_barang ? 'black' : '#4c4c4c',
               }}>
-              {namaBarang ? namaBarang : 'Nama Barang'}
+              {pickItem?.nama_barang ? pickItem?.nama_barang : 'Nama Barang'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -83,6 +110,7 @@ const CariBarangTokoScreen = (props: any) => {
           </View>
         </View>
         <TouchableOpacity
+          onPress={cariBarang}
           style={{
             backgroundColor: '#2E7D32',
             padding: 12,
@@ -131,11 +159,11 @@ const CariBarangTokoScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
+              fontWeight: kodeBarang ? '600' : '300',
+              color: kodeBarang ? 'black' : '#4c4c4c',
               textAlign: 'center',
             }}>
-            1
+            {kodeBarang ? kodeBarang : 'Kode Barang'}
           </Text>
         </View>
         <Text
@@ -159,11 +187,11 @@ const CariBarangTokoScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
+              fontWeight: stokBarang ? '600' : '300',
+              color: stokBarang ? 'black' : '#4c4c4c',
               textAlign: 'center',
             }}>
-            1
+            {stokBarang ? stokBarang : 'Stok Barang'}
           </Text>
         </View>
         <Text
@@ -187,11 +215,11 @@ const CariBarangTokoScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
+              fontWeight: merekBarang ? '600' : '300',
+              color: merekBarang ? 'black' : '#4c4c4c',
               textAlign: 'center',
             }}>
-            1
+            {merekBarang ? merekBarang : 'Merek Barang'}
           </Text>
         </View>
         <Text
@@ -215,11 +243,11 @@ const CariBarangTokoScreen = (props: any) => {
           <Text
             style={{
               fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
+              fontWeight: satuanBarang ? '600' : '300',
+              color: satuanBarang ? 'black' : '#4c4c4c',
               textAlign: 'center',
             }}>
-            1
+            {satuanBarang ? satuanBarang : 'Satuan Barang'}
           </Text>
         </View>
       </ImageBackground>
