@@ -28,9 +28,13 @@ const KeluarGudangScreen = (props: any) => {
     try {
       await axios.post(`${BASE_URL}barang_keluar/gudang.php`, {
         kode_barang: itemPick.kode_barang,
-        jumlah_keluar: jumlah,
+        jumlah: jumlah,
+        tanggal: `${tangglaMasuk} 00:00:00`,
       });
+
       setJumlah('');
+      setTangglaMasuk('');
+      setItemPick({});
     } catch (error) {
       console.log('Error fetching data:', error);
     }
@@ -155,7 +159,7 @@ const KeluarGudangScreen = (props: any) => {
             value={tangglaMasuk}
             keyboardType="numeric"
             onChangeText={text => setTangglaMasuk(text)}
-            placeholder="Tanggal Masuk Barang"
+            placeholder="Tanggal Masuk Contoh (2025-04-29)"
           />
         </View>
         <TouchableOpacity
