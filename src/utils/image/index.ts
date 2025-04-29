@@ -5,7 +5,7 @@ const BgHome = require('./BackgroundScreen.jpg');
 const menuMasuk = require('./menuMasuk.jpg');
 const menuKeluar = require('./menuKeluar.jpg');
 const menuRetur = require('./menuRetur.jpg');
-const menuServis = require('./menuServis.jpg');
+const menuServis = require('./menuService.jpg');
 const menuGudang = require('./menuGudang.jpg');
 
 export {

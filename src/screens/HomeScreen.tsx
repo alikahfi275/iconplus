@@ -5,7 +5,6 @@ import {
   Image,
   TouchableOpacity,
   Platform,
-  ImageBackground,
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {
@@ -55,10 +54,10 @@ const HomeScreen = () => {
     }, 1000);
   }, []);
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgHome} style={{flex: 1}}>
-        <View style={{backgroundColor: '#018082'}}>
+    <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <View style={{flex: 1}}>
+        <View style={{backgroundColor: '#1e81b0'}}>
           <Text
             style={{
               textAlign: 'center',
@@ -122,7 +121,7 @@ const HomeScreen = () => {
             resizeMode="stretch"
           />
         </TouchableOpacity>
-      </ImageBackground>
+      </View>
     </View>
   );
 };

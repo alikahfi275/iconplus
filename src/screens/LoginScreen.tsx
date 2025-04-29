@@ -54,8 +54,8 @@ const LoginScreen = () => {
         backgroundColor: 'white',
       }}>
       <Spinner visible={showSpinner} textContent={'Loading...'} color="white" />
-      <StatusBar backgroundColor="#0094ff" barStyle="dark-content" />
-      <ImageBackground source={BgLogin} style={{flex: 1}}>
+      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <View
           style={{
             alignItems: 'center',
@@ -78,7 +78,7 @@ const LoginScreen = () => {
               fontSize: 30,
               fontWeight: '700',
               marginTop: 120,
-              color: '#018082',
+              color: '#1e81b0',
               textDecorationLine: 'underline',
             }}>
             LOGIN
@@ -92,6 +92,7 @@ const LoginScreen = () => {
             flexDirection: 'row',
             paddingHorizontal: 10,
             alignItems: 'center',
+            backgroundColor: 'white',
           }}>
           <Image source={User} style={{width: 30, height: 30}} />
           <TextInput
@@ -110,6 +111,7 @@ const LoginScreen = () => {
             flexDirection: 'row',
             paddingHorizontal: 10,
             alignItems: 'center',
+            backgroundColor: 'white',
           }}>
           <Icons name="key" color="black" size={25} style={{marginRight: 5}} />
           <TextInput
@@ -137,7 +139,7 @@ const LoginScreen = () => {
         <View style={{alignItems: 'flex-end'}}>
           <TouchableOpacity
             style={{
-              backgroundColor: '#018082',
+              backgroundColor: '#1e81b0',
               marginHorizontal: 20,
               paddingHorizontal: 80,
               marginTop: 30,
@@ -155,7 +157,7 @@ const LoginScreen = () => {
             </Text>
           </TouchableOpacity>
         </View>
-      </ImageBackground>
+      </View>
     </View>
   );
 };
