@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   Text,
@@ -11,6 +11,9 @@ import {
 import {BgHome, NoImage} from '../utils/image';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
+import {BASE_URL} from '../utils/api/api';
+import axios from 'axios';
+import ImageCropPicker from 'react-native-image-crop-picker';
 
 const EditBarangScreen = (props: any) => {
   const [kodeBarang, setKodeBarang] = useState('');
@@ -21,17 +24,75 @@ const EditBarangScreen = (props: any) => {
   const [gambar, setGambar] = useState(null);
 
   const [modalVisible, setModalVisible] = useState(false);
+  const [dataGudang, setDataGudang] = useState([]);
+  const [pickItem, setPickItem] = useState<any>(null);
 
   const isService = props?.route?.params?.isService || false;
+  const routeName = isService ? 'service' : 'gudang';
 
-  const kodeBarangDummy = [
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17,
-  ];
+  const uploadGambar = () => {
+    ImageCropPicker.openPicker({
+      cropping: true,
+      width: 500,
+      height: 500,
+      cropperCircleOverlay: false,
+      includeBase64: true,
+    })
+      .then((imageResult: any) => {
+        const imageUri: any = `data:${imageResult.mime};base64,${imageResult.data}`;
+        setGambar(imageUri);
+      })
+      .catch(error => {});
+  };
 
-  const uploadGambar = () => {};
+  const getListBarangGudang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}barang/${routeName}/list.php`,
+      );
+      if (response.data.status === 'success') {
+        setDataGudang(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  const updateBarang = async () => {
+    try {
+      await axios.post(`${BASE_URL}barang/${routeName}/update.php`, {
+        kode_barang: kodeBarang,
+        nama_barang: namaBarang,
+        stok: stokBarang,
+        satuan: satuanBarang,
+        merek: merekBarang,
+        gambar: gambar,
+      });
+      setKodeBarang('');
+      setNamaBarang('');
+      setStokBarang('');
+      setMerekBarang('');
+      setSatuanBarang('');
+      setGambar(null);
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getListBarangGudang();
+  }, []);
 
   const handleSelect = (item: any) => {
-    setKodeBarang(item);
+    setPickItem(item);
+    if (item.kode_barang) {
+      setKodeBarang(item.kode_barang);
+      setNamaBarang(item.nama_barang);
+      setStokBarang(item.stok);
+      setMerekBarang(item.merek);
+      setSatuanBarang(item.satuan);
+      setGambar(item.gambar);
+    }
   };
 
   return (
@@ -42,7 +103,7 @@ const EditBarangScreen = (props: any) => {
           title="Kode Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={kodeBarangDummy}
+          items={dataGudang}
           handleSelect={(item: any) => handleSelect(item)}
         />
         <Text
@@ -55,7 +116,7 @@ const EditBarangScreen = (props: any) => {
             backgroundColor: '#018082',
             paddingVertical: 10,
           }}>
-          Edit Barang {isService ? 'Service' : 'Toko'}
+          Edit Barang {isService ? 'Service' : 'Gudang'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>
@@ -80,10 +141,10 @@ const EditBarangScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: kodeBarang ? '600' : '300',
-                color: kodeBarang ? 'black' : '#4c4c4c',
+                fontWeight: pickItem?.kode_barang ? '600' : '300',
+                color: pickItem?.kode_barang ? 'black' : '#4c4c4c',
               }}>
-              {kodeBarang ? kodeBarang : '0'}
+              {pickItem?.kode_barang ? pickItem?.kode_barang : '0'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -189,6 +250,7 @@ const EditBarangScreen = (props: any) => {
           </TouchableOpacity>
 
           <TouchableOpacity
+            onPress={updateBarang}
             style={{
               backgroundColor: '#005A9C',
               padding: 12,
