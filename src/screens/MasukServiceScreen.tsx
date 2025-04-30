@@ -30,7 +30,7 @@ const MasukServiceScreen = (props: any) => {
         kode_barang: itemPick.kode_barang,
         jumlah_masuk: jumlah,
       });
-      await axios.post(`${BASE_URL}riwayat/masuk_service.php`, {
+      await axios.post(`${BASE_URL}riwayat/masuk.php`, {
         kode_barang: itemPick.kode_barang,
         jumlah: jumlah,
         tipe: 'service',

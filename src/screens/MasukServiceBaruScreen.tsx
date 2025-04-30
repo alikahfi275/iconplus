@@ -31,7 +31,7 @@ const MasukServiceBaruScreen = (props: any) => {
         merek: merekBarang,
         gambar: gambar,
       });
-      await axios.post(`${BASE_URL}riwayat/masuk_service.php`, {
+      await axios.post(`${BASE_URL}riwayat/masuk.php`, {
         kode_barang: kodeBarang,
         jumlah: jumlahBarang,
         tipe: 'service',

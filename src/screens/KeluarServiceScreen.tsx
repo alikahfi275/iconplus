@@ -28,7 +28,14 @@ const KeluarServiceScreen = (props: any) => {
       await axios.post(`${BASE_URL}barang_keluar/service.php`, {
         kode_barang: itemPick.kode_barang,
         jumlah: jumlah,
+      });
+
+      await axios.post(`${BASE_URL}riwayat/keluar.php`, {
+        kode_barang: itemPick.kode_barang,
+        jumlah: jumlah,
+        tipe: 'service',
         tanggal: `${tangglaMasuk} 00:00:00`,
+        nama_barang: itemPick.nama_barang,
       });
 
       setJumlah('');
