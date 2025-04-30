@@ -27,9 +27,13 @@ const KeluarServiceScreen = (props: any) => {
     try {
       await axios.post(`${BASE_URL}barang_keluar/service.php`, {
         kode_barang: itemPick.kode_barang,
-        jumlah_keluar: jumlah,
+        jumlah: jumlah,
+        tanggal: `${tangglaMasuk} 00:00:00`,
       });
+
       setJumlah('');
+      setTangglaMasuk('');
+      setItemPick({});
     } catch (error) {
       console.log('Error fetching data:', error);
     }
