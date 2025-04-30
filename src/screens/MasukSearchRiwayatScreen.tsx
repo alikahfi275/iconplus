@@ -87,7 +87,7 @@ const MasukSearchRiwayatScreen = (props: any) => {
   const getListRiwayat = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}riwayat/masuk_${routeName}_list.php`,
+        `${BASE_URL}riwayat/masuk_list.php?tipe=${routeName}`,
       );
       if (response.data.status === 'success') {
         const data = response.data.data;
