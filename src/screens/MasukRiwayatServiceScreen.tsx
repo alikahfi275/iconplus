@@ -18,7 +18,7 @@ const MasukRiwayatServiceScreen = (props: any) => {
   const getListRiwayatService = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}riwayat/masuk_service_list.php`,
+        `${BASE_URL}riwayat/masuk_list.php?tipe=${'service'}`,
       );
       if (response.data.status === 'success') {
         setDataRiwayatService(response.data.data);
