@@ -18,7 +18,7 @@ const KeluarRiwayatGudangScreen = (props: any) => {
   const getListRiwayatGudang = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}riwayat/masuk_list.php?tipe=${'gudang'}`,
+        `${BASE_URL}riwayat/keluar_list.php?tipe=${'gudang'}`,
       );
       if (response.data.status === 'success') {
         setDataRiwayatGudang(response.data.data);

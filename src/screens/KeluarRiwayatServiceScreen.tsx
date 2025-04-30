@@ -6,48 +6,31 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import Icons from '../components/Icons';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
+import moment from 'moment';
 
 const KeluarRiwayatServiceScreen = (props: any) => {
-  const isMasuk = props?.route?.params?.isMasuk || false;
-  const isKeluar = props?.route?.params?.isKeluar || false;
-  const isReturn = props?.route?.params?.isReturn || false;
+  const [dataRiwayatService, setDataRiwayatService] = useState([]);
 
-  const riwayatDummy = [
-    {
-      id: 1,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 2,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 3,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-    {
-      id: 4,
-      tanggalMasuk: '2023-01-01',
-      kodeBarangMasuk: '123',
-      namaBarangMasuk: 'Baju',
-      jumlahMasuk: 10,
-      satuanMasuk: 'Pcs',
-    },
-  ];
+  const getListRiwayatGudang = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}riwayat/keluar_list.php?tipe=${'service'}`,
+      );
+      if (response.data.status === 'success') {
+        setDataRiwayatService(response.data.data);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getListRiwayatGudang();
+  }, []);
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
@@ -66,8 +49,8 @@ const KeluarRiwayatServiceScreen = (props: any) => {
         </View>
 
         <FlatList
-          data={riwayatDummy}
-          renderItem={({item}) => (
+          data={dataRiwayatService}
+          renderItem={({item}: any) => (
             <View
               style={{
                 backgroundColor: 'white',
@@ -85,7 +68,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
                   padding: 5,
                   backgroundColor: '#1e81b0',
                 }}>
-                Tanggal Masuk : {item?.tanggalMasuk}
+                Tanggal Masuk : {moment(item?.tanggal).format('L')}
               </Text>
               <Text
                 style={{
@@ -94,7 +77,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Kode Barang Masuk: {item?.kodeBarangMasuk}
+                Kode Barang : {item?.kode_barang}
               </Text>
               <Text
                 style={{
@@ -103,7 +86,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Nama Barang : {item?.namaBarangMasuk}
+                Nama Barang : {item?.nama_barang}
               </Text>
               <Text
                 style={{
@@ -112,7 +95,7 @@ const KeluarRiwayatServiceScreen = (props: any) => {
                   color: 'black',
                   padding: 5,
                 }}>
-                Jumlah Masuk : {item?.jumlahMasuk}
+                Jumlah Masuk : {item?.jumlah}
               </Text>
             </View>
           )}
