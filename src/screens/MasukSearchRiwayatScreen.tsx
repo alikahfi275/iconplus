@@ -9,7 +9,7 @@ import {
   ScrollView,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BgHome} from '../utils/image';
+
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
 import axios from 'axios';

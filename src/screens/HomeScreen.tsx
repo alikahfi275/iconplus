@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React, {useEffect} from 'react';
 import {
-  BgHome,
   menuKeluar,
   menuMasuk,
   menuRetur,

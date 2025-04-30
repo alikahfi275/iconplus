@@ -1,6 +1,6 @@
 import {View, Text, StatusBar, ImageBackground, Image} from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BgHome, NoImage} from '../utils/image';
+import {NoImage} from '../utils/image';
 import {BASE_URL} from '../utils/api/api';
 import axios from 'axios';
 

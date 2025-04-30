@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BgHome} from '../utils/image';
+
 import Icons from '../components/Icons';
 import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';

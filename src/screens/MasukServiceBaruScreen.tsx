@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React, {useState} from 'react';
-import {BgHome, NoImage} from '../utils/image';
+import {NoImage} from '../utils/image';
 import {BASE_URL} from '../utils/api/api';
 import axios from 'axios';
 import ImageCropPicker from 'react-native-image-crop-picker';

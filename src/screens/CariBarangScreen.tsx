@@ -7,7 +7,7 @@ import {
   StatusBar,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
-import {BgHome, NoImage} from '../utils/image';
+import {NoImage} from '../utils/image';
 import ModalList from '../components/ModalList';
 import Icons from '../components/Icons';
 import axios from 'axios';

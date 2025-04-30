@@ -9,7 +9,7 @@ import {
   ImageBackground,
   StatusBar,
 } from 'react-native';
-import {BgHome, NoImage} from '../utils/image';
+import {NoImage} from '../utils/image';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
 import {BASE_URL} from '../utils/api/api';

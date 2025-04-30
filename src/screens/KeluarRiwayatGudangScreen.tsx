@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import React from 'react';
-import {BgHome} from '../utils/image';
 import Icons from '../components/Icons';
 
 const KeluarRiwayatGudangScreen = (props: any) => {

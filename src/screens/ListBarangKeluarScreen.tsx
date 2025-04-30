@@ -1,6 +1,6 @@
 import {View, Text, ImageBackground, TouchableOpacity} from 'react-native';
 import React from 'react';
-import {BgHome} from '../utils/image';
+
 import {useNavigation} from '@react-navigation/native';
 
 const ListBarangKeluarScreen = (props: any) => {
