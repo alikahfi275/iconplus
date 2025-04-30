@@ -68,7 +68,7 @@ const KeluarRiwayatGudangScreen = (props: any) => {
                   padding: 5,
                   backgroundColor: '#1e81b0',
                 }}>
-                Tanggal Masuk : {moment(item?.tanggalMasuk).format('L')}
+                Tanggal Masuk : {moment(item?.tanggal).format('L')}
               </Text>
               <Text
                 style={{
@@ -102,7 +102,7 @@ const KeluarRiwayatGudangScreen = (props: any) => {
         />
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('MasukSearchRiwayat', {
+            props.navigation.navigate('KeluarSearchRiwayat', {
               isGudang: true,
             })
           }

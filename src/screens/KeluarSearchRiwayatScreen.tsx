@@ -2,66 +2,116 @@ import {
   View,
   Text,
   StatusBar,
-  ImageBackground,
   TextInput,
   TouchableOpacity,
   FlatList,
   ScrollView,
 } from 'react-native';
-import React, {useState} from 'react';
-
+import React, {useEffect, useState} from 'react';
+import RNHTMLtoPDF from 'react-native-html-to-pdf';
 import Icons from '../components/Icons';
 import ModalList from '../components/ModalList';
+import {BASE_URL} from '../utils/api/api';
+import axios from 'axios';
+import moment from 'moment';
 
 const KeluarSearchRiwayatScreen = (props: any) => {
   const isGudang = props?.route?.params?.isGudang || false;
 
+  const routeName = isGudang ? 'gudang' : 'service';
+
   const [modalVisible, setModalVisible] = useState(false);
-  const [namaBarang, setNamaBarang] = useState('');
+  const [namaBarang, setNamaBarang] = useState<any>('');
 
   const [tanggalDari, setTanggalDari] = useState('');
   const [tanggalSampai, setTanggalSampai] = useState('');
+  const [dataResult, setDataResult] = useState<any>([]);
+  const [dataRiwayat, setDataRiwayat] = useState<any>([]);
 
-  const namaBarangDummy = [
-    'Pensil',
-    'Penghapus',
-    'Penggaris',
-    'Penggaris',
-    'Penggaris',
-  ];
+  const generatePDF = async () => {
+    // Membuat HTML dari array
+    let htmlContent =
+      '<h1>Inventory Report</h1><table border="1" cellpadding="5" cellspacing="0">';
+    htmlContent +=
+      '<tr><th>Kode Barang</th><th>Nama Barang</th><th>Jumlah</th><th>Tipe</th><th>Tanggal</th></tr>';
 
-  const dummyData = [
-    {
-      id: '1',
-      tanggal: '20-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 10,
-      jenis: 'Masuk',
-      lokasi: 'Toko',
-    },
-    {
-      id: '2',
-      tanggal: '21-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 5,
-      jenis: 'Keluar',
-      lokasi: 'Service',
-    },
-    {
-      id: '3',
-      tanggal: '22-12-2022',
-      namaBarang: 'Isolasi 1/2 Inch',
-      tanggalMasuk: '20-12-2022',
-      kodeBarang: '123',
-      jumlah: 2,
-      jenis: 'Return',
-      lokasi: 'Toko',
-    },
-  ];
+    dataResult.forEach((item: any) => {
+      htmlContent += `
+      <tr>
+        <td>${item.kode_barang}</td>
+        <td>${item.nama_barang}</td>
+        <td>${item.jumlah}</td>
+        <td>${item.tipe}</td>
+        <td>${item.tanggal}</td>
+      </tr>
+    `;
+    });
+
+    htmlContent += '</table>';
+
+    // Mengonversi HTML menjadi PDF
+    const options = {
+      html: htmlContent,
+      fileName: 'inventory_report',
+      directory: 'Documents',
+    };
+
+    const file = await RNHTMLtoPDF.convert(options);
+    console.log(file.filePath); // Menampilkan lokasi file PDF yang dihasilkan
+  };
+
+  const searchByFilter = async () => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}riwayat/keluar_filter.php`,
+        {
+          dari_tanggal: `${tanggalDari} 00:00:00`,
+          ke_tanggal: `${tanggalSampai} 23:59:59`,
+          nama_barang: namaBarang?.nama_barang,
+          tipe: routeName,
+        },
+      );
+
+      console.log(response.data);
+
+      if (response.data.status === 'success') {
+        setDataResult(response.data.data);
+      }
+      setTanggalDari('');
+      setTanggalSampai('');
+      setNamaBarang('');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  const getListRiwayat = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}riwayat/keluar_list.php?tipe=${routeName}`,
+      );
+      if (response.data.status === 'success') {
+        const data = response.data.data;
+
+        const seen = new Set();
+        const filteredData = data.filter((item: any) => {
+          if (seen.has(item.nama_barang)) {
+            return false;
+          }
+          seen.add(item.nama_barang);
+          return true;
+        });
+
+        setDataRiwayat(filteredData);
+      }
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
+  useEffect(() => {
+    getListRiwayat();
+  }, []);
 
   const renderItem = ({item}: any) => (
     <View
@@ -70,31 +120,30 @@ const KeluarSearchRiwayatScreen = (props: any) => {
         paddingVertical: 10,
         borderBottomWidth: 1,
         borderBottomColor: '#ccc',
+        justifyContent: 'space-between',
+        flex: 1,
       }}>
-      <Text
-        style={{flex: 1, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.kodeBarang}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {item.kode_barang}
       </Text>
-      <Text
-        style={{flex: 2, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.namaBarang}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {item.nama_barang}
       </Text>
-      <Text
-        style={{flex: 1, fontSize: 14, paddingHorizontal: 5, color: 'black'}}>
-        {item.tanggalMasuk}
+      <Text style={{fontSize: 14, marginHorizontal: 15, color: 'black'}}>
+        {moment(item.tanggal).format('YYYY-MM-DD')}
       </Text>
     </View>
   );
 
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="#abdbe3" barStyle="dark-content" />
+      <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
       <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
         <ModalList
           title="Nama Barang"
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
-          items={namaBarangDummy}
+          items={dataRiwayat}
           handleSelect={(item: any) => setNamaBarang(item)}
         />
         <View style={{backgroundColor: '#1e81b0'}}>
@@ -106,7 +155,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            {`Cari Riwayat Barang Masuk ${isGudang ? 'Gudang' : 'Service'}`}
+            {`Cari Riwayat Barang Keluar ${isGudang ? 'Gudang' : 'Service'}`}
           </Text>
         </View>
         <View style={{marginHorizontal: 20, marginTop: 20}}>
@@ -123,7 +172,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
             value={tanggalDari}
             keyboardType="numeric"
             onChangeText={text => setTanggalDari(text)}
-            placeholder="Masukan Tanggal contoh : (20-12-2022)"
+            placeholder="Masukan Tanggal contoh : (2022-12-20)"
           />
         </View>
         <View style={{marginHorizontal: 20, marginTop: 20}}>
@@ -137,10 +186,10 @@ const KeluarSearchRiwayatScreen = (props: any) => {
               paddingVertical: 5,
               marginBottom: 10,
             }}
-            value={tanggalDari}
+            value={tanggalSampai}
             keyboardType="numeric"
-            onChangeText={text => setTanggalDari(text)}
-            placeholder="Masukan Tanggal contoh : (20-12-2022)"
+            onChangeText={text => setTanggalSampai(text)}
+            placeholder="Masukan Tanggal contoh : (2022-12-20)"
           />
         </View>
         <View style={{marginHorizontal: 20}}>
@@ -165,10 +214,12 @@ const KeluarSearchRiwayatScreen = (props: any) => {
             <Text
               style={{
                 fontSize: 16,
-                fontWeight: namaBarang ? '600' : '300',
-                color: namaBarang ? 'black' : '#4c4c4c',
+                fontWeight: namaBarang?.nama_barang ? '600' : '300',
+                color: namaBarang?.nama_barang ? 'black' : '#4c4c4c',
               }}>
-              {namaBarang ? namaBarang : 'Nama Barang'}
+              {namaBarang?.nama_barang
+                ? namaBarang?.nama_barang
+                : 'Nama Barang'}
             </Text>
             <Icons
               name="arrow-down-drop-circle"
@@ -179,7 +230,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={searchByFilter}
           style={{
             marginHorizontal: 20,
             backgroundColor: '#1e81b0',
@@ -192,7 +243,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => {}}
+          onPress={generatePDF}
           style={{
             marginHorizontal: 20,
             marginBottom: 20,
@@ -216,41 +267,39 @@ const KeluarSearchRiwayatScreen = (props: any) => {
                 backgroundColor: '#f0f0f0',
                 borderBottomWidth: 2,
                 borderBottomColor: '#1e81b0',
+                justifyContent: 'space-between',
               }}>
               <Text
                 style={{
-                  flex: 1,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
                 Kode Barang
               </Text>
               <Text
                 style={{
-                  flex: 2,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
                 Nama Barang
               </Text>
               <Text
                 style={{
-                  flex: 1,
                   fontSize: 14,
                   fontWeight: 'bold',
-                  paddingHorizontal: 5,
+                  marginHorizontal: 15,
                   color: 'black',
                 }}>
-                Tanggal Masuk
+                Tanggal Keluar
               </Text>
             </View>
             {/* Table Data */}
             <FlatList
-              data={dummyData}
+              data={dataResult}
               renderItem={renderItem}
               keyExtractor={item => item.id}
             />
