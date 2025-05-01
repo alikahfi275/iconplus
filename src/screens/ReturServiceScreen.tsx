@@ -9,7 +9,6 @@ import {
 import React, {useState} from 'react';
 import {NoImage} from '../utils/image';
 import {LocalStorage} from '../utils/database/storage';
-import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
 
 const ReturServiceScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
@@ -82,12 +81,7 @@ const ReturServiceScreen = () => {
     setKodeBarang('');
     setJumlah('');
     setMessage('');
-    setMassegeReason(''); // Reset message text
-    Toast.show({
-      type: ALERT_TYPE.SUCCESS,
-      title: 'SUKSES',
-      textBody: 'Data Anda Berhasil Disimpan ',
-    });
+    setMassegeReason('');
   };
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>

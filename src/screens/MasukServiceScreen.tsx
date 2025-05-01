@@ -19,7 +19,7 @@ const MasukServiceScreen = (props: any) => {
   const navigation: any = useNavigation();
   const [modalVisible, setModalVisible] = useState(false);
   const [itemPick, setItemPick] = useState<any>({});
-  const [jumlah, setJumlah] = useState('');
+  const [jumlah, setJumlah] = useState(0);
 
   const [dataService, setDataService] = useState([]);
   const [showSpinner, setShowSpinner] = useState(false);
@@ -36,9 +36,21 @@ const MasukServiceScreen = (props: any) => {
         tipe: 'service',
         nama_barang: itemPick.nama_barang,
       });
-      setJumlah('');
+      setJumlah(0);
+      setItemPick({});
+      getListBarangGudang();
     } catch (error) {
       console.log('Error fetching data:', error);
+    }
+  };
+
+  const handleIncrease = () => {
+    setJumlah(prev => prev + 1); // Menambah 1
+  };
+
+  const handleDecrease = () => {
+    if (jumlah > 0) {
+      setJumlah(prev => prev - 1); // Mengurangi 1, dengan pengecekan agar tidak negatif
     }
   };
 
@@ -72,7 +84,11 @@ const MasukServiceScreen = (props: any) => {
           modalVisible={modalVisible}
           setModalVisible={setModalVisible}
           items={dataService}
-          handleSelect={(item: any) => setItemPick(item)}
+          handleSelect={(item: any) => {
+            setItemPick(item);
+            setModalVisible(false);
+            setJumlah(Number(item.stok));
+          }}
         />
         <View style={{backgroundColor: '#1e81b0'}}>
           <Text
@@ -121,27 +137,59 @@ const MasukServiceScreen = (props: any) => {
               onPress={() => setModalVisible(true)}
             />
           </View>
-          <Text
-            style={{
-              fontSize: 16,
-              fontWeight: '600',
-              color: 'black',
-              marginTop: 20,
-            }}>
-            Jumlah Barang
-          </Text>
-          <TextInput
-            style={{
-              borderBottomWidth: 1,
-              borderColor: 'black',
-              paddingVertical: 5,
-              marginBottom: 10,
-            }}
-            value={jumlah}
-            keyboardType="numeric"
-            onChangeText={text => setJumlah(text)}
-            placeholder="Masukan Jumlah Barang"
-          />
+          <View style={{marginTop: 10}}>
+            <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+              Jumlah Barang
+            </Text>
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                marginTop: 10,
+              }}>
+              <TouchableOpacity
+                onPress={handleDecrease}
+                style={{
+                  paddingVertical: 10,
+                  paddingHorizontal: 25,
+                  backgroundColor: '#1e81b0',
+                  borderRadius: 5,
+                }}>
+                <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                  -
+                </Text>
+              </TouchableOpacity>
+
+              <TextInput
+                style={{
+                  borderBottomWidth: 1,
+                  borderColor: 'black',
+                  paddingVertical: 5,
+                  width: 100,
+                  textAlign: 'center',
+                  fontSize: 16,
+                  fontWeight: '600',
+                }}
+                value={String(jumlah)}
+                keyboardType="numeric"
+                onChangeText={text => setJumlah(Number(text))}
+              />
+
+              <TouchableOpacity
+                onPress={handleIncrease}
+                style={{
+                  paddingVertical: 10,
+                  paddingHorizontal: 25,
+                  backgroundColor: '#1e81b0',
+                  borderRadius: 5,
+                }}>
+                <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                  +
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         <TouchableOpacity
           onPress={updateJumlah}
