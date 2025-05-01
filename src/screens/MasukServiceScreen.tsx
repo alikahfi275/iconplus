@@ -32,7 +32,7 @@ const MasukServiceScreen = (props: any) => {
       });
       await axios.post(`${BASE_URL}riwayat/masuk.php`, {
         kode_barang: itemPick.kode_barang,
-        jumlah: jumlah,
+        jumlah: itemPick.stok + jumlah,
         tipe: 'service',
         nama_barang: itemPick.nama_barang,
       });
@@ -45,12 +45,12 @@ const MasukServiceScreen = (props: any) => {
   };
 
   const handleIncrease = () => {
-    setJumlah(prev => prev + 1); // Menambah 1
+    setJumlah(prev => prev + 1);
   };
 
   const handleDecrease = () => {
     if (jumlah > 0) {
-      setJumlah(prev => prev - 1); // Mengurangi 1, dengan pengecekan agar tidak negatif
+      setJumlah(prev => prev - 1);
     }
   };
 

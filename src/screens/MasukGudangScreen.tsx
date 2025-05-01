@@ -25,7 +25,7 @@ const MasukGudangScreen = (props: any) => {
       });
       await axios.post(`${BASE_URL}riwayat/masuk.php`, {
         kode_barang: itemPick.kode_barang,
-        jumlah: jumlah,
+        jumlah: itemPick.stok + jumlah,
         tipe: 'gudang',
         nama_barang: itemPick.nama_barang,
       });
