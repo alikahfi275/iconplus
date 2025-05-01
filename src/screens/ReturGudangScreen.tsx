@@ -5,256 +5,272 @@ import {
   TextInput,
   StatusBar,
   Image,
+  ScrollView,
 } from 'react-native';
 import React, {useState} from 'react';
 import {NoImage} from '../utils/image';
-import {LocalStorage} from '../utils/database/storage';
-import {ALERT_TYPE, Toast} from 'react-native-alert-notification';
+import Icons from '../components/Icons';
+import ModalList from '../components/ModalList';
+import axios from 'axios';
+import {BASE_URL} from '../utils/api/api';
+import {useFocusEffect} from '@react-navigation/native';
+import ModalListItem from '../components/ModalListItem';
 
 const ReturGudangScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
-  const [barang, setBarang] = useState(null as any);
-  const [jumlah, setJumlah] = useState('');
-  const [message, setMessage] = useState('');
-  const [massegeReason, setMassegeReason] = useState('');
+  const [namaBarang, setNamaBarang] = useState<any>('');
+  const [tanggalRetur, setTanggalRetur] = useState('');
+  const [jumlahBarang, setJumlahBarang] = useState('');
+  const [supplier, setSupplier] = useState('');
+  const [status, setStatus] = useState<any>('');
+  const [catatan, setCatatan] = useState('');
+  const [dataGudang, setDataGudang] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalProsesVisible, setModalProsesVisible] = useState(false);
 
-  const rawData = LocalStorage.getItem('incomingItems');
-  const allData = Array.isArray(rawData) ? rawData : [];
+  const statusProses = [
+    {label: 'Proses', value: 'proses'},
+    {label: 'Selesai', value: 'selesai'},
+  ];
 
-  const rawDataHistory = LocalStorage.getItem('historyItems');
-  const existingDataHistory = Array.isArray(rawDataHistory)
-    ? rawDataHistory
-    : [];
-
-  const handleCekBarang = () => {
-    const found = allData.find(
-      item => item.kode.toLowerCase() === kodeBarang.toLowerCase(),
-    );
-    if (found?.nama) {
-      setMessage('');
-    } else {
-      setMessage('Kode Barang Tidak Ditemukan');
-    }
-    setBarang(found || null);
-  };
-
-  const saveOutgoingItems = () => {
-    if (!barang || !jumlah) return;
-
-    const jumlahKeluar = parseInt(jumlah, 10);
-
-    // Cek jumlah valid
-    if (isNaN(jumlahKeluar) || jumlahKeluar <= 0) {
-      setMessage('Jumlah tidak valid');
-      return;
-    }
-
-    const newDataHistory = {
-      id: Date.now(),
-      kode: kodeBarang,
-      nama: barang?.nama,
-      jumlah: jumlahKeluar.toString(),
-      kategori: barang?.kategori,
-      alasan: massegeReason,
-      tanggal: new Date().toISOString(),
-      type: 'Barang Return',
-    };
-
-    const updatedDataHistory = [...existingDataHistory, newDataHistory];
-    LocalStorage.setItem('historyItems', updatedDataHistory);
-
-    // Update jumlah di data lama
-    const updatedData = allData.map(item => {
-      if (item.kode === barang.kode) {
-        return {
-          ...item,
-          jumlah: (parseInt(item.jumlah, 10) + jumlahKeluar).toString(), // ➕ tambah stok
-        };
+  const getListBarangGudang = async () => {
+    try {
+      const response = await axios.get(`${BASE_URL}barang/gudang/list.php`);
+      if (response.data.status === 'success') {
+        setDataGudang(response.data.data);
       }
-      return item;
-    });
-
-    // Simpan ke local storage
-    LocalStorage.setItem('incomingItems', updatedData);
-
-    // Reset form
-    setBarang(null);
-    setKodeBarang('');
-    setJumlah('');
-    setMessage('');
-    setMassegeReason(''); // Reset message text
-    Toast.show({
-      type: ALERT_TYPE.SUCCESS,
-      title: 'SUKSES',
-      textBody: 'Data Anda Berhasil Disimpan ',
-    });
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
   };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      getListBarangGudang();
+    }, []),
+  );
+
+  const simpanRetur = async () => {
+    try {
+      await axios.post(`${BASE_URL}barang_retur/gudang.php`, {
+        nama_barang: namaBarang?.nama_barang,
+        kode_barang: kodeBarang,
+        tanggal_retur: `${tanggalRetur} 00:00:00`,
+        jumlah: jumlahBarang,
+        supplier: supplier,
+        status: status?.value,
+        catatan: catatan,
+      });
+      setKodeBarang('');
+      setNamaBarang('');
+      setJumlahBarang('');
+      setSupplier('');
+      setCatatan('');
+      setStatus('');
+      setTanggalRetur('');
+    } catch (error) {
+      console.log('Error fetching data:', error);
+    }
+  };
+
   return (
-    <View style={{flex: 1, backgroundColor: 'white'}}>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
-      <View style={{alignItems: 'center', marginTop: 20}}>
-        <Image
-          source={barang?.gambar ? {uri: barang?.gambar} : NoImage}
-          style={{width: 200, height: 200, marginBottom: 5, borderRadius: 10}}
-          resizeMode="stretch"
-        />
-      </View>
-      <View style={{flexDirection: 'row', marginHorizontal: 20, marginTop: 10}}>
-        <View style={{flex: 0.5}}>
+    <ScrollView style={{flex: 1, backgroundColor: '#abdbe3'}}>
+      <StatusBar backgroundColor="#FFFFA3" barStyle="dark-content" />
+      <ModalList
+        title="Nama Barang"
+        modalVisible={modalVisible}
+        setModalVisible={setModalVisible}
+        items={dataGudang}
+        handleSelect={(item: any) => {
+          setNamaBarang(item);
+          setKodeBarang(item.kode_barang);
+        }}
+      />
+      <ModalListItem
+        title="Proses"
+        modalVisible={modalProsesVisible}
+        setModalVisible={setModalProsesVisible}
+        items={statusProses}
+        handleSelect={(item: any) => {
+          setStatus(item);
+        }}
+      />
+      <View style={{flex: 1, backgroundColor: '#abdbe3'}}>
+        <View style={{backgroundColor: '#FFFFA3'}}>
           <Text
             style={{
-              color: '#4c4c4c',
+              textAlign: 'center',
+              fontSize: 28,
+              color: 'black',
+              fontWeight: '700',
+              marginVertical: 5,
             }}>
-            Nama Barang
+            Barang Retur Gudang
           </Text>
         </View>
-        <Text
-          style={{
-            color: '#4c4c4c',
-          }}>
-          :{' '}
-        </Text>
-        <View style={{flex: 1}}>
-          <Text
-            style={{
-              color: '#4c4c4c',
-            }}>
-            {barang?.nama}
-          </Text>
-        </View>
-      </View>
-      <View style={{flexDirection: 'row', marginHorizontal: 20}}>
-        <View style={{flex: 0.5}}>
-          <Text
-            style={{
-              color: '#4c4c4c',
-            }}>
-            Kategori Barang
-          </Text>
-        </View>
-        <Text
-          style={{
-            color: '#4c4c4c',
-          }}>
-          :{' '}
-        </Text>
-        <View style={{flex: 1}}>
-          <Text
-            style={{
-              color: '#4c4c4c',
-            }}>
-            {barang?.kategori}
-          </Text>
-        </View>
-      </View>
-      {message && (
+
         <Text
           style={{
             fontSize: 16,
-            fontWeight: '300',
-            marginTop: 15,
-            marginLeft: 20,
-            marginBottom: 5,
-            color: 'red',
+            fontWeight: '600',
+            color: 'black',
+            marginHorizontal: 20,
+            marginTop: 20,
           }}>
-          {message}
+          Nama Barang
         </Text>
-      )}
-      <View
-        style={{
-          flexDirection: 'row',
-          marginHorizontal: 20,
-          marginTop: message ? 0 : 15,
-        }}>
-        <TextInput
-          placeholder="Masukan Kode Barang"
-          placeholderTextColor={'#b2b2b2'}
-          value={kodeBarang}
-          onChangeText={(text: string) => {
-            setKodeBarang(text);
-            if (text === '') {
-              setMessage('');
-            }
-          }}
+
+        <View
           style={{
-            flex: 1,
-            borderRadius: 15,
-            borderWidth: 1,
-            paddingHorizontal: 15,
-            fontSize: 18,
-            color: '#4c4c4c',
-            borderColor: '#72B4D3',
-          }}
-        />
-        <TouchableOpacity
-          onPress={handleCekBarang}
-          style={{
-            marginLeft: 10,
-            paddingHorizontal: 15,
-            backgroundColor: '#72B4D3',
-            borderRadius: 15,
+            flexDirection: 'row',
             alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'space-between',
+            marginHorizontal: 20,
           }}>
-          <Text style={{color: 'white', fontSize: 20, fontWeight: '500'}}>
-            Cek
+          <Text
+            style={{
+              fontSize: 14,
+              fontWeight: namaBarang?.nama_barang ? '600' : '300',
+              color: namaBarang?.nama_barang ? 'black' : '#4c4c4c',
+              marginTop: 5,
+            }}>
+            {namaBarang?.nama_barang ? namaBarang?.nama_barang : 'Nama Barang'}
+          </Text>
+          <Icons
+            name="arrow-down-drop-circle"
+            size={20}
+            color="black"
+            onPress={() => setModalVisible(true)}
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Kode Barang Retur
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={kodeBarang}
+            onChangeText={text => setKodeBarang(text)}
+            placeholder="Masukan Kode"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Tanggal Retur
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={tanggalRetur}
+            onChangeText={text => setTanggalRetur(text)}
+            placeholder="Tanggal Retur"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Jumlah Barang
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={jumlahBarang}
+            onChangeText={text => setJumlahBarang(text)}
+            placeholder="Jumlah Barang"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Supplier
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={supplier}
+            onChangeText={text => setSupplier(text)}
+            placeholder="Supplier"
+          />
+        </View>
+
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Status
+          </Text>
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+            }}>
+            <Text
+              style={{
+                fontSize: 14,
+                fontWeight: status?.label ? '600' : '300',
+                color: status?.label ? 'black' : '#4c4c4c',
+                marginTop: 5,
+              }}>
+              {status?.label ? status?.label : 'Pilih Status'}
+            </Text>
+            <Icons
+              name="arrow-down-drop-circle"
+              size={20}
+              color="black"
+              onPress={() => setModalProsesVisible(true)}
+            />
+          </View>
+        </View>
+        <View style={{marginHorizontal: 20, marginTop: 10}}>
+          <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
+            Catatan
+          </Text>
+          <TextInput
+            style={{
+              borderBottomWidth: 1,
+              borderColor: 'black',
+              paddingVertical: 5,
+              marginBottom: 10,
+            }}
+            value={catatan}
+            onChangeText={text => setCatatan(text)}
+            placeholder="Catatan"
+          />
+        </View>
+        <TouchableOpacity
+          onPress={simpanRetur}
+          style={{
+            marginHorizontal: 20,
+            marginBottom: 20,
+            backgroundColor: '#FFFFA3',
+            alignItems: 'center',
+            paddingVertical: 10,
+            marginTop: 20,
+          }}>
+          <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
+            SIMPAN
           </Text>
         </TouchableOpacity>
       </View>
-      <TextInput
-        placeholder="Masukan Jumlah Barang Direturn"
-        placeholderTextColor={'#b2b2b2'}
-        value={jumlah}
-        editable={barang?.nama ? true : false}
-        keyboardType="numeric"
-        onChangeText={text => setJumlah(text)}
-        style={{
-          borderRadius: 15,
-          borderWidth: 1,
-          paddingHorizontal: 15,
-          fontSize: 18,
-          color: '#4c4c4c',
-          borderColor: barang?.nama ? '#72B4D3' : '#b2b2b2',
-          marginHorizontal: 20,
-          marginTop: 15,
-        }}
-      />
-      <TextInput
-        placeholder="Alasan Direturn"
-        placeholderTextColor={'#b2b2b2'}
-        value={massegeReason}
-        editable={barang?.nama ? true : false}
-        keyboardType="numeric"
-        onChangeText={text => setMassegeReason(text)}
-        style={{
-          borderRadius: 15,
-          borderWidth: 1,
-          paddingHorizontal: 15,
-          fontSize: 18,
-          color: '#4c4c4c',
-          borderColor: barang?.nama ? '#72B4D3' : '#b2b2b2',
-          marginHorizontal: 20,
-          marginTop: 15,
-        }}
-      />
-
-      <TouchableOpacity
-        onPress={saveOutgoingItems}
-        disabled={barang?.nama ? false : true}
-        style={{
-          backgroundColor: barang?.nama ? '#72B4D3' : '#b2b2b2',
-          borderRadius: 15,
-          alignItems: 'center',
-          justifyContent: 'center',
-          marginHorizontal: 20,
-          marginTop: 20,
-          padding: 10,
-        }}>
-        <Text style={{color: 'white', fontSize: 20, fontWeight: '500'}}>
-          Simpan
-        </Text>
-      </TouchableOpacity>
-    </View>
+    </ScrollView>
   );
 };
 
