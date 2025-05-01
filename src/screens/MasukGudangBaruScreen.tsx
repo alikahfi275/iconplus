@@ -16,7 +16,7 @@ import ImageCropPicker from 'react-native-image-crop-picker';
 const MasukGudangBaruScreen = (props: any) => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [namaBarang, setNamaBarang] = useState('');
-  const [jumlahBarang, setJumlahBarang] = useState('');
+  const [jumlahBarang, setJumlahBarang] = useState(0);
   const [merekBarang, setMerekBarang] = useState('');
   const [satuanBarang, setSatuanBarang] = useState('');
   const [gambar, setGambar] = useState(null);
@@ -40,11 +40,21 @@ const MasukGudangBaruScreen = (props: any) => {
       setGambar(null);
       setKodeBarang('');
       setNamaBarang('');
-      setJumlahBarang('');
+      setJumlahBarang(0);
       setMerekBarang('');
       setSatuanBarang('');
     } catch (error) {
       console.log('Error fetching data:', error);
+    }
+  };
+
+  const handleIncrease = () => {
+    setJumlahBarang(prev => prev + 1); // Menambah 1
+  };
+
+  const handleDecrease = () => {
+    if (jumlahBarang > 0) {
+      setJumlahBarang(prev => prev - 1); // Mengurangi 1, dengan pengecekan agar tidak negatif
     }
   };
 
@@ -114,21 +124,58 @@ const MasukGudangBaruScreen = (props: any) => {
           />
         </View>
 
-        <View style={{marginHorizontal: 20, marginTop: 10}}>
+        <View style={{marginTop: 10, marginHorizontal: 20}}>
           <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
             Jumlah Barang
           </Text>
-          <TextInput
+          <View
             style={{
-              borderBottomWidth: 1,
-              borderColor: 'black',
-              paddingVertical: 5,
-              marginBottom: 10,
-            }}
-            value={jumlahBarang}
-            onChangeText={text => setJumlahBarang(text)}
-            placeholder="Masukan Jumlah Barang"
-          />
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: 10,
+            }}>
+            <TouchableOpacity
+              onPress={handleDecrease}
+              style={{
+                paddingVertical: 10,
+                paddingHorizontal: 25,
+                backgroundColor: '#1e81b0',
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                -
+              </Text>
+            </TouchableOpacity>
+
+            <TextInput
+              style={{
+                borderBottomWidth: 1,
+                borderColor: 'black',
+                paddingVertical: 5,
+                width: 100,
+                textAlign: 'center',
+                fontSize: 16,
+                fontWeight: '600',
+              }}
+              value={String(jumlahBarang)}
+              keyboardType="numeric"
+              onChangeText={text => setJumlahBarang(Number(text))}
+            />
+
+            <TouchableOpacity
+              onPress={handleIncrease}
+              style={{
+                paddingVertical: 10,
+                paddingHorizontal: 25,
+                backgroundColor: '#1e81b0',
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                +
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={{marginHorizontal: 20, marginTop: 10}}>
