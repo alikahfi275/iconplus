@@ -6258,11 +6258,6 @@ react-is@^17.0.1:
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-alert-notification@0.4.2:
-  version "0.4.2"
-  resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-native-alert-notification/-/react-native-alert-notification-0.4.2.tgz#fabb1bc94e4f7d459dd8e47e8aed03a93651b8c7"
-  integrity sha512-98EQ+DtI7thEAHzoXMbN8dZRCFcoGXMRYYIKvooPPdASuuZIuON4oxCbJNDb6r6lebnPc/25JCD1tJPaoPNWnw==
-
 react-native-gesture-handler@2.18.0:
   version "2.18.0"
   resolved "http://devops.quadrant-si.id/nexus/repository/npm-group/react-native-gesture-handler/-/react-native-gesture-handler-2.18.0.tgz#0246ff3b6b1d26e2dc2e6990dfcb06e100a163de"
