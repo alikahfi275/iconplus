@@ -20,18 +20,29 @@ const ReturGudangScreen = () => {
   const [kodeBarang, setKodeBarang] = useState('');
   const [namaBarang, setNamaBarang] = useState<any>('');
   const [tanggalRetur, setTanggalRetur] = useState('');
-  const [jumlahBarang, setJumlahBarang] = useState('');
+  const [jumlahBarang, setJumlahBarang] = useState(0);
   const [supplier, setSupplier] = useState('');
   const [status, setStatus] = useState<any>('');
   const [catatan, setCatatan] = useState('');
   const [dataGudang, setDataGudang] = useState([]);
   const [modalVisible, setModalVisible] = useState(false);
+
   const [modalProsesVisible, setModalProsesVisible] = useState(false);
 
   const statusProses = [
     {label: 'Proses', value: 'proses'},
     {label: 'Selesai', value: 'selesai'},
   ];
+
+  const handleIncrease = () => {
+    setJumlahBarang(prev => prev + 1); // Menambah 1
+  };
+
+  const handleDecrease = () => {
+    if (jumlahBarang > 0) {
+      setJumlahBarang(prev => prev - 1); // Mengurangi 1, dengan pengecekan agar tidak negatif
+    }
+  };
 
   const getListBarangGudang = async () => {
     try {
@@ -63,7 +74,7 @@ const ReturGudangScreen = () => {
       });
       setKodeBarang('');
       setNamaBarang('');
-      setJumlahBarang('');
+      setJumlahBarang(0);
       setSupplier('');
       setCatatan('');
       setStatus('');
@@ -182,17 +193,54 @@ const ReturGudangScreen = () => {
           <Text style={{fontSize: 16, fontWeight: '600', color: 'black'}}>
             Jumlah Barang
           </Text>
-          <TextInput
+          <View
             style={{
-              borderBottomWidth: 1,
-              borderColor: 'black',
-              paddingVertical: 5,
-              marginBottom: 10,
-            }}
-            value={jumlahBarang}
-            onChangeText={text => setJumlahBarang(text)}
-            placeholder="Jumlah Barang"
-          />
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              marginTop: 10,
+            }}>
+            <TouchableOpacity
+              onPress={handleDecrease}
+              style={{
+                paddingVertical: 10,
+                paddingHorizontal: 25,
+                backgroundColor: '#FFFFA3',
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                -
+              </Text>
+            </TouchableOpacity>
+
+            <TextInput
+              style={{
+                borderBottomWidth: 1,
+                borderColor: 'black',
+                paddingVertical: 5,
+                width: 100,
+                textAlign: 'center',
+                fontSize: 16,
+                fontWeight: '600',
+              }}
+              value={String(jumlahBarang)}
+              keyboardType="numeric"
+              onChangeText={text => setJumlahBarang(Number(text))}
+            />
+
+            <TouchableOpacity
+              onPress={handleIncrease}
+              style={{
+                paddingVertical: 10,
+                paddingHorizontal: 25,
+                backgroundColor: '#FFFFA3',
+                borderRadius: 5,
+              }}>
+              <Text style={{fontSize: 18, color: 'black', fontWeight: '600'}}>
+                +
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={{marginHorizontal: 20, marginTop: 10}}>
