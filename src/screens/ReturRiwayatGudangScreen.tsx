@@ -4,13 +4,14 @@ import moment from 'moment';
 import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';
 import Icons from '../components/Icons';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ReturRiwayatGudangScreen = (props: any) => {
   const [dataRiwayatGudang, setDataRiwayatGudang] = useState<any>([]);
   const getListRiwayatGudang = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}riwayat/retur_list.php?tipe=${'gudang'}`,
+        `${BASE_URL}riwayat/retur_list_gudang.php`,
       );
 
       if (response.data.status === 'success') {
@@ -21,9 +22,11 @@ const ReturRiwayatGudangScreen = (props: any) => {
     }
   };
 
-  useEffect(() => {
-    getListRiwayatGudang();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getListRiwayatGudang();
+    }, []),
+  );
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#1e81b0" barStyle="dark-content" />
@@ -113,7 +116,7 @@ const ReturRiwayatGudangScreen = (props: any) => {
         />
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('ReturSearchRiwayat', {
+            props.navigation.navigate('ReturEditRiwayat', {
               isGudang: true,
             })
           }
@@ -129,7 +132,7 @@ const ReturRiwayatGudangScreen = (props: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('ReturSearchRiwayat', {
+            props.navigation.navigate('ReturEditRiwayat', {
               isGudang: true,
             })
           }

@@ -4,13 +4,14 @@ import moment from 'moment';
 import axios from 'axios';
 import {BASE_URL} from '../utils/api/api';
 import Icons from '../components/Icons';
+import {useFocusEffect} from '@react-navigation/native';
 
 const ReturRiwayatServiceScreen = (props: any) => {
   const [dataRiwayatService, setDataRiwayatService] = useState<any>([]);
   const getListRiwayatService = async () => {
     try {
       const response = await axios.get(
-        `${BASE_URL}riwayat/retur_list.php?tipe=${'service'}`,
+        `${BASE_URL}riwayat/retur_list_service.php`,
       );
 
       if (response.data.status === 'success') {
@@ -21,9 +22,11 @@ const ReturRiwayatServiceScreen = (props: any) => {
     }
   };
 
-  useEffect(() => {
-    getListRiwayatService();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      getListRiwayatService();
+    }, []),
+  );
   return (
     <View style={{flex: 1, backgroundColor: 'white'}}>
       <StatusBar backgroundColor="#FFFFA3" barStyle="dark-content" />
@@ -132,7 +135,7 @@ const ReturRiwayatServiceScreen = (props: any) => {
 
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('ReturSearchRiwayat', {
+            props.navigation.navigate('ReturEditRiwayat', {
               isService: true,
             })
           }

@@ -23,6 +23,7 @@ import ReturService from './src/screens/ReturServiceScreen';
 import ReturRiwayatGudang from './src/screens/ReturRiwayatGudangScreen';
 import ReturRiwayatService from './src/screens/ReturRiwayatServiceScreen';
 import ReturSearchRiwayat from './src/screens/ReturSearchRiwayatScreen';
+import ReturEditRiwayat from './src/screens/ReturEditRiwayatScreen';
 
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
@@ -118,6 +119,7 @@ export default function App() {
           name="ReturSearchRiwayat"
           component={ReturSearchRiwayat}
         />
+        <Stack.Screen name="ReturEditRiwayat" component={ReturEditRiwayat} />
       </Stack.Navigator>
     </NavigationContainer>
   );
