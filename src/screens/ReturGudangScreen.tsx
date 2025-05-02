@@ -72,6 +72,17 @@ const ReturGudangScreen = () => {
         status: status?.value,
         catatan: catatan,
       });
+
+      await axios.post(`${BASE_URL}riwayat/retur.php`, {
+        kode_barang: kodeBarang,
+        jumlah: jumlahBarang,
+        tanggal: `${tanggalRetur} 00:00:00`,
+        tipe: 'gudang',
+        status: status?.value,
+        nama_barang: namaBarang?.nama_barang,
+        catatan: catatan,
+      });
+
       setKodeBarang('');
       setNamaBarang('');
       setJumlahBarang(0);

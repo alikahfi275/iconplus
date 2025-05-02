@@ -76,6 +76,15 @@ const ReturServiceScreen = () => {
         nama_pelanggan: namaPelanggan,
         tanggal_diantar: `${tanggalDiantar} 00:00:00`,
       });
+      await axios.post(`${BASE_URL}riwayat/retur.php`, {
+        kode_barang: kodeBarang,
+        jumlah: jumlahBarang,
+        tanggal: `${tanggalRetur} 00:00:00`,
+        tipe: 'service',
+        status: status?.value,
+        nama_barang: namaBarang?.nama_barang,
+        catatan: catatan,
+      });
 
       setKodeBarang('');
       setNamaBarang('');
