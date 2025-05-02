@@ -84,6 +84,7 @@ const ReturServiceScreen = () => {
         status: status?.value,
         nama_barang: namaBarang?.nama_barang,
         catatan: catatan,
+        supplier: supplier,
       });
 
       setKodeBarang('');

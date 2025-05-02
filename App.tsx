@@ -20,6 +20,9 @@ import KeluarSearchRiwayat from './src/screens/KeluarSearchRiwayatScreen';
 
 import ReturGudang from './src/screens/ReturGudangScreen';
 import ReturService from './src/screens/ReturServiceScreen';
+import ReturRiwayatGudang from './src/screens/ReturRiwayatGudangScreen';
+import ReturRiwayatService from './src/screens/ReturRiwayatServiceScreen';
+import ReturSearchRiwayat from './src/screens/ReturSearchRiwayatScreen';
 
 import StokBarangGudang from './src/screens/StokBarangGudangScreen';
 import StokBarangServis from '../iconplus/src/screens/StokBarangServisScreen';
@@ -103,6 +106,18 @@ export default function App() {
           component={KeluarSearchRiwayat}
         />
         <Stack.Screen name="ReturService" component={ReturService} />
+        <Stack.Screen
+          name="ReturRiwayatGudang"
+          component={ReturRiwayatGudang}
+        />
+        <Stack.Screen
+          name="ReturRiwayatService"
+          component={ReturRiwayatService}
+        />
+        <Stack.Screen
+          name="ReturSearchRiwayat"
+          component={ReturSearchRiwayat}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
