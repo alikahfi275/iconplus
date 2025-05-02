@@ -85,6 +85,8 @@ const ReturServiceScreen = () => {
         nama_barang: namaBarang?.nama_barang,
         catatan: catatan,
         supplier: supplier,
+        nama_pelanggan: namaPelanggan,
+        tanggal_dianter: `${tanggalDiantar} 00:00:00`,
       });
 
       setKodeBarang('');

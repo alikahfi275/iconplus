@@ -117,6 +117,15 @@ const ReturRiwayatServiceScreen = (props: any) => {
                 }}>
                 Catatan : {item?.catatan}
               </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: 'black',
+                  padding: 5,
+                }}>
+                Nama Pelanggan : {item?.nama_pelanggan}
+              </Text>
             </View>
           )}
         />

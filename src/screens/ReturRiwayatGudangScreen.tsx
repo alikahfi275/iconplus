@@ -99,6 +99,15 @@ const ReturRiwayatGudangScreen = (props: any) => {
                 }}>
                 Supplier : {item?.supplier}
               </Text>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: 'bold',
+                  color: 'black',
+                  padding: 5,
+                }}>
+                Status : {item?.status}
+              </Text>
             </View>
           )}
         />

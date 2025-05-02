@@ -82,6 +82,8 @@ const ReturGudangScreen = () => {
         nama_barang: namaBarang?.nama_barang,
         catatan: catatan,
         supplier: supplier,
+        nama_pelanggan: '',
+        tanggal_dianter: '00-00-00 00:00:00',
       });
 
       setKodeBarang('');
