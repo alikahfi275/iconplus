@@ -7,7 +7,7 @@ import {
   Image,
 } from 'react-native';
 import React, {useState} from 'react';
-import {BgLogin} from '../utils/image';
+import SHA1 from 'crypto-js/sha1';
 import {TextInput} from 'react-native-gesture-handler';
 import Icons from '../components/Icons';
 import {useNavigation} from '@react-navigation/native';
@@ -25,12 +25,14 @@ const LoginScreen = () => {
   const navigation: any = useNavigation();
   const [showSpinner, setShowSpinner] = useState(false);
 
+  const hashedPassword = SHA1(password).toString();
+
   const handleLogin = async () => {
     setShowSpinner(true);
     try {
       const response = await axios.post(`${BASE_URL}auth/login.php`, {
         username,
-        password,
+        password: hashedPassword,
       });
       if (response.data.status === 'success') {
         navigation.navigate('Home');
