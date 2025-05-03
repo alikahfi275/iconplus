@@ -132,7 +132,7 @@ const ReturRiwayatGudangScreen = (props: any) => {
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() =>
-            props.navigation.navigate('ReturEditRiwayat', {
+            props.navigation.navigate('ReturSearchRiwayat', {
               isGudang: true,
             })
           }
