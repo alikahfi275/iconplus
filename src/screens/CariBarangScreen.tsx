@@ -73,7 +73,7 @@ const CariBarangTokoScreen = (props: any) => {
             backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
-          Cari Barang {isService ? 'Service' : 'Gudang'}
+          Cari Barang {isService ? 'Service' : 'Icon'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>

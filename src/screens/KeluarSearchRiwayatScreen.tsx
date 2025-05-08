@@ -155,7 +155,7 @@ const KeluarSearchRiwayatScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            {`Cari Riwayat Barang Keluar ${isGudang ? 'Gudang' : 'Service'}`}
+            {`Cari Riwayat Barang Keluar ${isGudang ? 'Icon' : 'Service'}`}
           </Text>
         </View>
         <View style={{marginHorizontal: 20, marginTop: 20}}>

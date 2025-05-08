@@ -39,7 +39,7 @@ const ListBarangMasukScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Barang Masuk Gudang
+              Barang Masuk Icon
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -78,7 +78,7 @@ const ListBarangMasukScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Riwayat Barang Masuk Gudang
+              Riwayat Barang Masuk Icon
             </Text>
           </TouchableOpacity>
           <TouchableOpacity

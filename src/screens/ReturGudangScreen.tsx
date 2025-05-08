@@ -130,7 +130,7 @@ const ReturGudangScreen = () => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Retur Gudang
+            Barang Retur Icon
           </Text>
         </View>
 

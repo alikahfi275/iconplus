@@ -69,7 +69,7 @@ const HapusBarangTokoScreen = (props: any) => {
             backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
-          Hapus Barang {isService ? 'Service' : 'Gudang'}
+          Hapus Barang {isService ? 'Service' : 'Icon'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>

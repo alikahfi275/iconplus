@@ -103,7 +103,7 @@ const KeluarGudangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Keluar Gudang
+            Barang Keluar Icon
           </Text>
         </View>
 

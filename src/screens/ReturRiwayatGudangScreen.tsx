@@ -40,7 +40,7 @@ const ReturRiwayatGudangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Riwayat Barang Retur Gudang
+            Riwayat Barang Retur Icon
           </Text>
         </View>
 

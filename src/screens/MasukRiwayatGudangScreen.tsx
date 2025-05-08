@@ -45,7 +45,7 @@ const MasukRiwayatGudangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Riwayat Barang Masuk Gudang
+            Riwayat Barang Masuk Icon
           </Text>
         </View>
 

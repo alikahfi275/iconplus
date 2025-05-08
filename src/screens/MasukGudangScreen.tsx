@@ -92,7 +92,7 @@ const MasukGudangScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk Gudang
+            Barang Masuk Icon
           </Text>
         </View>
 
@@ -208,7 +208,7 @@ const MasukGudangScreen = (props: any) => {
             paddingVertical: 10,
           }}>
           <Text style={{fontSize: 16, color: 'black', fontWeight: '600'}}>
-            BARANG MASUK GUDANG BARU
+            BARANG MASUK ICON BARU
           </Text>
         </TouchableOpacity>
       </View>

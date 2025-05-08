@@ -56,7 +56,7 @@ const StokBarangScreen = () => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            STOK BARANG GUDANG
+            STOK BARANG ICON
           </Text>
         </View>
         <FlatList

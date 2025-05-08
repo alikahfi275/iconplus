@@ -119,7 +119,7 @@ const EditBarangScreen = (props: any) => {
             backgroundColor: '#1e81b0',
             paddingVertical: 10,
           }}>
-          Edit Barang {isService ? 'Service' : 'Gudang'}
+          Edit Barang {isService ? 'Service' : 'Icon'}
         </Text>
 
         <View style={{marginHorizontal: 20}}>

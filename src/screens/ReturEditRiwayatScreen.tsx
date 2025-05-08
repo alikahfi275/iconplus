@@ -136,7 +136,7 @@ const ReturEditRiwayatScreen = (props: any) => {
             backgroundColor: '#FFFFA3',
             paddingVertical: 10,
           }}>
-          Edit Barang Retur {isService ? 'Service' : 'Gudang'}
+          Edit Barang Retur {isService ? 'Service' : 'Icon'}
         </Text>
         <View style={{flex: 1, marginHorizontal: 20}}>
           <Text

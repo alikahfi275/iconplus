@@ -39,7 +39,7 @@ const ListBarangReturScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              Barang Retur Gudang
+              Barang Retur Icon
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -78,7 +78,7 @@ const ListBarangReturScreen = (props: any) => {
                 textAlign: 'center',
                 marginVertical: 20,
               }}>
-              {'Riwayat Barang \n Retur Gudang'}
+              {'Riwayat Barang \n Retur Icon'}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity

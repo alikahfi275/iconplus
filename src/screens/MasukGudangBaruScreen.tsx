@@ -86,7 +86,7 @@ const MasukGudangBaruScreen = (props: any) => {
               fontWeight: '700',
               marginVertical: 5,
             }}>
-            Barang Masuk Gudang Baru
+            Barang Masuk Icon Baru
           </Text>
         </View>
 
