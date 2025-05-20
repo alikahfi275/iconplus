@@ -12,7 +12,7 @@ import {
   menuMasuk,
   menuRetur,
   menuServis,
-  menuGudang,
+  menuIcon,
 } from '../utils/image';
 import {useNavigation} from '@react-navigation/native';
 import {check, PERMISSIONS, request, RESULTS} from 'react-native-permissions';
@@ -106,7 +106,7 @@ const HomeScreen = () => {
           style={{marginHorizontal: 15, marginTop: 20}}
           onPress={() => navigation.navigate('StokBarangGudang')}>
           <Image
-            source={menuGudang}
+            source={menuIcon}
             style={{height: 200, width: 'auto'}}
             resizeMode="stretch"
           />

@@ -3,6 +3,6 @@ const menuMasuk = require('./menuMasuk.jpg');
 const menuKeluar = require('./menuKeluar.jpg');
 const menuRetur = require('./menuRetur.jpg');
 const menuServis = require('./menuService.jpg');
-const menuGudang = require('./menuGudang.jpg');
+const menuIcon = require('./menuIcon.jpg');
 
-export {NoImage, menuMasuk, menuKeluar, menuRetur, menuGudang, menuServis};
+export {NoImage, menuMasuk, menuKeluar, menuRetur, menuIcon, menuServis};
