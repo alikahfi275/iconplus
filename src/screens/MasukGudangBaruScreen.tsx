@@ -2,7 +2,6 @@ import {
   View,
   Text,
   StatusBar,
-  ImageBackground,
   TextInput,
   Image,
   TouchableOpacity,
@@ -23,7 +22,7 @@ const MasukGudangBaruScreen = (props: any) => {
 
   const addItems = async () => {
     try {
-      await axios.post(`${BASE_URL}barang/gudang/create.php`, {
+      await axios.post(`${BASE_URL}barang/icon/create.php`, {
         kode_barang: kodeBarang,
         nama_barang: namaBarang,
         stok: jumlahBarang,
@@ -37,6 +36,7 @@ const MasukGudangBaruScreen = (props: any) => {
         tipe: 'gudang',
         nama_barang: namaBarang,
       });
+
       setGambar(null);
       setKodeBarang('');
       setNamaBarang('');
